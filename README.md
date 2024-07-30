@@ -1,30 +1,16 @@
-# React + TypeScript + Vite
+# Porject Name : User Management Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Business Case
 
-Currently, two official plugins are available:
+[Business Case Documentation](business-case-doc.md)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Wireframe
 
-## Expanding the ESLint configuration
+[Figma File](https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FmbtqNXlzHirdr2G2JJjt27%2FWireframe%3Fnode-id%3D2-2%26t%3DcLc3Qb2kxMgmFHiw-1%26scaling%3Dmin-zoom%26content-scaling%3Dfixed%26page-id%3D0%253A1)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+![Desktop Admin View 1](https://raw.githubusercontent.com/alkemyTech/CENCO-MIT-Back-T2/main/src/assets/img/desktop-admin1.png)
+![Desktop Admin View 2](https://raw.githubusercontent.com/alkemyTech/CENCO-MIT-Back-T2/main/src/assets/img/desktop-admin2.png)
+![Desktop User View 1](https://raw.githubusercontent.com/alkemyTech/CENCO-MIT-Back-T2/main/src/assets/img/desktop-user1.png)
+![Desktop User View 2](https://raw.githubusercontent.com/alkemyTech/CENCO-MIT-Back-T2/main/src/assets/img/desktop-user2.png)
+![Mobile Admin View](https://raw.githubusercontent.com/alkemyTech/CENCO-MIT-Back-T2/main/src/assets/img/mobile-admin.png)
+![Mobile User View](https://raw.githubusercontent.com/alkemyTech/CENCO-MIT-Back-T2/main/src/assets/img/mobile-user.png)

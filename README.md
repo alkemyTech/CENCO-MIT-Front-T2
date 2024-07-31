@@ -1,30 +1,110 @@
-# React + TypeScript + Vite
+# Project Name: User Management Client 🧑‍💻
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Table of Contents
+- [Description](#description)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Directory Structure](#directory-structure)
+- [Business Case](#business-case)
+- [Prototyping](#prototyping)
+- [Contributing](#contributing)
+- [License](#license)
 
-Currently, two official plugins are available:
+## Description
+This project is a user management web application built using React and TypeScript. It features login functionality, a home view, and a user management view. The application leverages React Router for navigation, Redux for state management, and follows best practices with Prettier for code formatting and ESLint for linting. Modular CSS is used for styling components.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- **Login**: Secure login functionality for users.
+- **Home View**: A dashboard for displaying general information.
+- **User Management**: 
+  - **Administrators**: Create, edit, and delete user accounts.
+  - **Regular Users**: View their information and update their password.
 
-## Expanding the ESLint configuration
+## Technologies Used
+- **TypeScript**: A strongly typed programming language that builds on JavaScript.
+- **React**: A JavaScript library for building user interfaces.
+- **React Router**: A library for routing in React applications.
+- **Redux**: A predictable state container for JavaScript apps.
+- **Prettier**: An opinionated code formatter.
+- **ESLint**: A tool for identifying and reporting on patterns in JavaScript.
+- **Modular CSS**: A CSS file in which all class and animation names are scoped locally by default.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/alkemyTech/CENCO-MIT-Front-T2.git
+   cd CENCO-MIT-Front-T2
+   ```
+2. Install the dependencies:
+   ```bash
+   pnpm install # or npm install
+   ```
+3. Start the application:
+   ```bash
+   pnpm run dev # or npm run dev
 
-- Configure the top-level `parserOptions` property like this:
+## Usage
+Once the application is running, you can access it at `http://localhost:5173`. The main views include:
+- **Login**: Accessible at `/login`
+- **Home**: Accessible at `/home` when authorized
+- **User Management**: Accessible at `/users` when authorized
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Directory Structure
+```arduino
+CENCO-MIT-Front-T2/
+├── public/
+│   └── index.html
+├── src/
+│   ├── assets/
+│   │   └── images/
+│   ├── components/
+│   │   └── common/
+│   ├── pages/
+│   │   ├── Home/
+│   │   ├── Login/
+│   │   └── Users/
+│   ├── redux/
+│   │   ├── actions/
+│   │   ├── reducers/
+│   │   └── store.ts
+│   ├── App.tsx
+│   ├── index.tsx
+│   ├── routes.tsx
+│   ├── styles/
+│   └── utils/
+├── .eslintrc.js
+├── .prettierrc
+├── package.json
+└── tsconfig.json
+
 ```
+## Business Case
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+[Business Case Documentation](business-case-doc.md)
+
+## Prototyping
+
+### Wireframe
+
+[Figma File](https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FmbtqNXlzHirdr2G2JJjt27%2FWireframe%3Fnode-id%3D2-2%26t%3DcLc3Qb2kxMgmFHiw-1%26scaling%3Dmin-zoom%26content-scaling%3Dfixed%26page-id%3D0%253A1)
+
+![Desktop Admin View 1](https://raw.githubusercontent.com/alkemyTech/CENCO-MIT-Back-T2/main/src/assets/img/desktop-admin1.png)
+![Desktop Admin View 2](https://raw.githubusercontent.com/alkemyTech/CENCO-MIT-Back-T2/main/src/assets/img/desktop-admin2.png)
+![Desktop User View 1](https://raw.githubusercontent.com/alkemyTech/CENCO-MIT-Back-T2/main/src/assets/img/desktop-user1.png)
+![Desktop User View 2](https://raw.githubusercontent.com/alkemyTech/CENCO-MIT-Back-T2/main/src/assets/img/desktop-user2.png)
+![Mobile Admin View](https://raw.githubusercontent.com/alkemyTech/CENCO-MIT-Back-T2/main/src/assets/img/mobile-admin.png)
+![Mobile User View](https://raw.githubusercontent.com/alkemyTech/CENCO-MIT-Back-T2/main/src/assets/img/mobile-user.png)
+
+## Contributing
+We welcome contributions from the community. Please follow these steps to contribute:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature`).
+3. Make your changes.
+4. Commit your changes (`git commit -am 'Add some feature'`).
+5. Push to the branch (`git push origin feature/your-feature`).
+6. Create a new Pull Request.
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

@@ -34,8 +34,8 @@ This project is a user management web application built using React and TypeScri
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/your-repository.git
-   cd your-repository
+   git clone https://github.com/alkemyTech/CENCO-MIT-Front-T2.git
+   cd CENCO-MIT-Front-T2
    ```
 2. Install the dependencies:
    ```bash

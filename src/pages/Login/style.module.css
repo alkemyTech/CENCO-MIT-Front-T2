@@ -1,0 +1,20 @@
+.login {
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  align-self: center;
+  padding: 0 var(--mg-200);
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--mg-100);
+  min-width: 260px;
+  height: 380px;
+  background: var(--clr-primary-100);
+  color: var(--clr-blue-500);
+  border-radius: var(--br-200);
+}

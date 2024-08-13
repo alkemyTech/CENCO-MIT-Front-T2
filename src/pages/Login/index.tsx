@@ -1,29 +1,41 @@
 import styles from './style.module.css';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import { useLogin } from './useLogin';
 
-export default function Login() {
+export function Login() {
+
+  const {
+    formData,
+    handleFieldChange,
+    errorLabel,
+    handleLoginClick,
+  } = useLogin();
+
   return (
     <main className={styles.login}>
       <form className={styles.form}>
-        <h1>Bootcamp User ADM</h1>
+        <h1>Talent Manager</h1>
         <h4>User management made simple.</h4>
         <Input
           label={'Enter your email'}
           type={'email'}
           placeholder=' '
-          handleOnChange={e => console.log(e.target.value)}
+          value={formData.email}
+          handleOnChange={(e) => handleFieldChange('email', e)}
         />
         <Input
           label={'Enter your password'}
           type={'password'}
           placeholder=' '
-          handleOnChange={e => console.log('*'.repeat(e.target.value.length))}
+          value={formData.password}
+          handleOnChange={(e) => handleFieldChange('password', e)}
         />
+        <label className={styles.labelErrorLogin}>{errorLabel}</label>
         <Button
           label={'Login'}
-          onClick={() => alert('me apretaste!')}
-          type='submit'
+          onClick={handleLoginClick}
+          type='button'
         />
       </form>
     </main>

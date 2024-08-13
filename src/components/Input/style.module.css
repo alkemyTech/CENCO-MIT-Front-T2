@@ -63,7 +63,7 @@ input:not(:focus):not(:placeholder-shown)~label {
   background: var(--clr-primary-100);
 }
 
-.label {
+label {
   position: absolute;
   font-weight: var(--fw-light);
   left: 0.4rem;

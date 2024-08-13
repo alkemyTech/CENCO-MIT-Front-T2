@@ -18,3 +18,10 @@
   color: var(--clr-blue-500);
   border-radius: var(--br-200);
 }
+
+.labelErrorLogin {
+  color: red;
+  font-size: var(--fs-100);
+  position: unset;
+  height: 24px;
+}

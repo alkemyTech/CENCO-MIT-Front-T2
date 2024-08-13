@@ -19,7 +19,7 @@ export function ErrorPage() {
   }
 
   const handleClick = () => {
-    navigate('/');
+    navigate(-1);
     console.error(error);
   };
   

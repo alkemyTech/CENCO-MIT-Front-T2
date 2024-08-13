@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { isEmailValid } from '../../utils';
 
 export function useLogin() {
   const navigate = useNavigate();
@@ -29,7 +30,11 @@ export function useLogin() {
 
   const handleLoginClick = async () => {
     let response : Response;
+
     try {
+      if(!isEmailValid(formData.email)) {
+        throw new Error('Email must be valid')
+      }
       response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/${import.meta.env.VITE_LOGIN_URL}`, {
         method: 'POST',
         body: JSON.stringify(formData),
@@ -51,24 +56,23 @@ export function useLogin() {
       };
 
       if (response.ok) {
-        token = JSON.parse(atob(res.token.split('.')[1]));
+        token = JSON.parse(decodeURIComponent(escape(atob(res.token.split('.')[1]))));
         sessionStorage.setItem('accessToken', res.token);
         sessionStorage.setItem('userId', token.id);
         sessionStorage.setItem('userName', token.name);
         sessionStorage.setItem('userSurname', token.surname);
         sessionStorage.setItem('userRole', token.role);
-        console.log(res.message)
         navigate('/home');
       } else {
         throw new Error(res.message)
       }
     } catch (error) {
-      if ((error as Error).message) {
-        setErrorLabel((error as Error).message);
+      if ((error as Error).message === 'Bad Request Exception') {
+        setErrorLabel('Email and password must be valid');
       } else {
-        setErrorLabel("There's been an unexpected error");
-        navigate('/');
+        setErrorLabel((error as Error).message);
       }
+      navigate('/');
     }
   };
 

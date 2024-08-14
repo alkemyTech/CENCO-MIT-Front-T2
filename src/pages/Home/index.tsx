@@ -23,12 +23,12 @@ export function Home() {
       <h2>{`Hello ${userName} ${userSurname}`}</h2>
       <h2>{`Your role is ${userRole}`}</h2>
 
-      {/* Botón para abrir el modal */}
+      {/* Button to open the modal */}
       <button onClick={openModal} className={styles.openModalButton}>
         Register New User
       </button>
 
-      {/* Renderizar el modal si el estado isModalOpen es true */}
+      {/* Render the modal if isModalOpen is true*/}
       {isModalOpen && <RegisterModal onClose={closeModal} />}
     </main>
   );

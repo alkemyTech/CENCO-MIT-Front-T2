@@ -121,8 +121,8 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             surname: '',
             email: '',
             password: '',
-            country: 'Chile', // Valor por defecto
-            role: 'user', // Valor fijo para el rol
+            country: 'Chile', // Default value
+            role: 'user', // Fixed value for the role
             rut: '',
           }}
           validate={validate}

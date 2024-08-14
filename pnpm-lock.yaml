@@ -20,6 +20,12 @@ importers:
       react-router-dom:
         specifier: ^6.25.1
         version: 6.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      rut-chile:
+        specifier: ^1.0.2
+        version: 1.0.2
+      sweetalert2:
+        specifier: ^11.12.4
+        version: 11.12.4
     devDependencies:
       '@types/react':
         specifier: ^18.3.3
@@ -888,6 +894,9 @@ packages:
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
 
+  rut-chile@1.0.2:
+    resolution: {integrity: sha512-/iGjmNCikyi5RVenOOw51lrli5JaFJ78nWBJaI3yKetsOT10hXeRWg8KE2pk6uwN5VNxAURmn5zyzLCHH8ekTA==}
+
   scheduler@0.23.2:
     resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
 
@@ -923,6 +932,9 @@ packages:
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
     engines: {node: '>=8'}
+
+  sweetalert2@11.12.4:
+    resolution: {integrity: sha512-ZSpyaLbAmn4b7xjnV9x9BFD1UOrCAhIzm1D8dZ443kGxtVKqbTIA5SgXs4xeEtmFfEXUyC3RBgpSlu1AXmCiHA==}
 
   text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
@@ -1775,6 +1787,8 @@ snapshots:
     dependencies:
       queue-microtask: 1.2.3
 
+  rut-chile@1.0.2: {}
+
   scheduler@0.23.2:
     dependencies:
       loose-envify: 1.4.0
@@ -1800,6 +1814,8 @@ snapshots:
   supports-color@7.2.0:
     dependencies:
       has-flag: 4.0.0
+
+  sweetalert2@11.12.4: {}
 
   text-table@0.2.0: {}
 

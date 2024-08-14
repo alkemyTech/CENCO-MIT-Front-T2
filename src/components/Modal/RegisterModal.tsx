@@ -1,135 +1,185 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { Formik, Field, Form, FormikProps, FormikErrors } from 'formik';
 import RUT from 'rut-chile';
 import { validateEmail, validatePassword } from '../Validations';
 
-interface RegisterModalProps {
-  onClose: () => void;
-}
+type FormValues = {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  country: string;
+  role: string;
+  rut: string;
+};
 
-const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    surname: '',
-    email: '',
-    password: '',
-    country: 'Chile',
-    role: 'user',
-    rut: '',
-  });
+let formikRef: FormikProps<FormValues> | null = null;
 
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+const MySwal = withReactContent(Swal);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  useEffect(() => {
+    const validate = (values: FormValues) => {
+      const errors: FormikErrors<FormValues> = {};
+
+      if (!values.name) {
+        errors.name = 'Nombre es obligatorio';
+      }
+
+      if (!values.surname) {
+        errors.surname = 'Apellido es obligatorio';
+      }
+
+      if (!values.email) {
+        if (!validateEmail(values.email)) {
+          errors.email = 'Correo electrónico inválido';
+        } else {
+          errors.email = 'Correo es obligatorio';
+        }
+      }
+
+      if (!values.password) {
+        errors.password = 'Contraseña es obligatoria';
+      } else if (!validatePassword(values.password)) {
+        errors.password = 'La contraseña no cumple con los requisitos';
+      }
+
+      if (!values.country) {
+        errors.country = 'País es obligatorio';
+      } else if (typeof values.country !== 'string') {
+        errors.country = 'País debe ser un texto';
+      }
+
+      if (!values.rut) {
+        errors.rut = 'RUT es obligatorio';
+      } else if (!RUT.validate(values.rut)) {
+        errors.rut = 'RUT inválido';
+      }
+
+      return errors;
+    };
+
+    const handleSubmit = async () => {
+      await formikRef?.submitForm();
+
+      if (formikRef?.isValid) {
+        const formData = formikRef?.values;
+
+        try {
+          const accessToken = sessionStorage.getItem('accessToken');
+          if (!accessToken) {
+            throw new Error(
+              'Falta el token de acceso. Por favor, inicia sesión nuevamente.'
+            );
+          }
+
+          const response = await fetch('http://localhost:3000/users/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify(formData),
+          });
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(
+              errorData.message || 'Error al registrar el usuario'
+            );
+          }
+
+          MySwal.fire({
+            title: 'Usuario Registrado',
+            text: 'El usuario ha sido registrado exitosamente.',
+            icon: 'success',
+          });
+          onClose();
+        } catch (error: unknown) {
+          if (error instanceof Error) {
+            MySwal.showValidationMessage(
+              error.message || 'Error en la solicitud'
+            );
+          } else {
+            MySwal.showValidationMessage('Error en la solicitud');
+          }
+        }
+      } else {
+        MySwal.showValidationMessage(JSON.stringify(formikRef?.errors));
+      }
+    };
+
+    MySwal.fire({
+      title: 'Registrar Nuevo Usuario',
+      html: (
+        <Formik<FormValues>
+          innerRef={(ref) => (formikRef = ref)}
+          initialValues={{
+            name: '',
+            surname: '',
+            email: '',
+            password: '',
+            country: 'Chile', // Valor por defecto
+            role: 'user', // Valor fijo para el rol
+            rut: '',
+          }}
+          validate={validate}
+          onSubmit={() => {}}
+        >
+          <Form>
+            <Field
+              type="text"
+              className="swal2-input"
+              name="name"
+              placeholder="Nombre Completo"
+            />
+            <Field
+              type="text"
+              className="swal2-input"
+              name="surname"
+              placeholder="Apellido"
+            />
+            <Field
+              type="email"
+              className="swal2-input"
+              name="email"
+              placeholder="Correo Electrónico"
+            />
+            <Field
+              type="password"
+              className="swal2-input"
+              name="password"
+              placeholder="Contraseña"
+            />
+            <Field
+              type="text"
+              className="swal2-input"
+              name="country"
+              placeholder="País"
+            />
+            <Field
+              type="text"
+              className="swal2-input"
+              name="rut"
+              placeholder="RUT"
+            />
+          </Form>
+        </Formik>
+      ),
+      didOpen: () => {
+        Swal.getPopup()?.querySelector('input')?.focus();
+      },
+      preConfirm: handleSubmit,
+    }).then((result) => {
+      if (result.isDismissed) {
+        onClose();
+      }
     });
-  };
+  }, [onClose]);
 
-  const validateForm = () => {
-    const newErrors: { [key: string]: string } = {};
-    if (!RUT.validate(formData.rut)) {
-      newErrors.rut = 'Invalid RUT';
-    }
-    if (!validateEmail(formData.email)) {
-      newErrors.email = 'Invalid email address';
-    }
-    if (!validatePassword(formData.password)) {
-      newErrors.password = 'Password does not meet the requirements';
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateForm()) return;
-
-    try {
-      // Retrieve the admin token from session storage
-      const adminToken = sessionStorage.getItem('accessToken');
-
-      if (!adminToken) {
-        throw new Error('Admin token is missing. Please log in again.');
-      }
-
-      const response = await fetch('http://localhost:3000/users/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${adminToken}`, // Include the admin token in the request
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        // Handle error
-        const errorData = await response.json();
-        setErrors({ server: errorData.message || 'Error registering user' });
-        return;
-      }
-
-      // Handle successful response, close modal or reset form
-      onClose();
-    } catch (error) {
-      setErrors({ server: 'Request error' });
-    }
-  };
-
-  return (
-    <div>
-      <h2>Register New User</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Full Name"
-          required
-        />
-        {errors.name && <p>{errors.name}</p>}
-        <input
-          name="surname"
-          value={formData.surname}
-          onChange={handleChange}
-          placeholder="Surname"
-          required
-        />
-        {errors.surname && <p>{errors.surname}</p>}
-        <input
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email Address"
-          required
-        />
-        {errors.email && <p>{errors.email}</p>}
-        <input
-          name="password"
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Password"
-          required
-        />
-        {errors.password && <p>{errors.password}</p>}
-        <input
-          name="rut"
-          value={formData.rut}
-          onChange={handleChange}
-          placeholder="RUT"
-          required
-        />
-        {errors.rut && <p>{errors.rut}</p>}
-        {/* Add other fields and roles here */}
-        <button type="submit">Register</button>
-      </form>
-      {/* Display server errors */}
-      {errors.server && <p>{errors.server}</p>}
-      {/* Button to close the modal */}
-      <button onClick={onClose}>Close</button>
-    </div>
-  );
+  return null;
 };
 
 export default RegisterModal;

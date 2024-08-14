@@ -8,7 +8,7 @@ type InputProps = {
   handleOnChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // optional
 };
 
-export default function Input({ label, type, value, placeholder, handleOnChange }: InputProps) {
+export function Input({ label, type, value, placeholder, handleOnChange }: InputProps) {
   return (
     <div className={styles.wrapper}>
       <input

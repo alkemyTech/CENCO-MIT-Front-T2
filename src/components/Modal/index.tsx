@@ -5,7 +5,7 @@ type ModalProps = {
   onClose?: () => void;
 };
 
-export default function Modal({ children, onClose }: ModalProps) {
+export function Modal({ children, onClose }: ModalProps) {
   return (
     <div className={styles.modal}>
       <div className={styles.wrapper}>

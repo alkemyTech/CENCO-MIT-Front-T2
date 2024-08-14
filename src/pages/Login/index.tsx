@@ -1,7 +1,6 @@
 import styles from './style.module.css';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
-import { useLogin } from './useLogin';
+import { Button, Input } from '../../components';
+import { useLogin } from '../../hooks';
 
 export function Login() {
   const { formData, handleFieldChange, errorLabel, handleLoginClick } =

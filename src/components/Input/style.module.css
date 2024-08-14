@@ -55,7 +55,7 @@ input:not(:placeholder-shown):focus~label {
   top: -0.5rem;
   font-size: var(--fs-200);
   left: 0.6rem;
-  color: var(--clr-blue-500);
+  color: var(--clr-blue-400);
 }
 
 input:not(:focus):not(:placeholder-shown)~label {

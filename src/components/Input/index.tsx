@@ -20,6 +20,7 @@ export default function Input({ label, type, value, placeholder, handleOnChange 
         onChange={handleOnChange}
         placeholder={placeholder}
         aria-label={`${label} input`}
+        autoComplete="new-password"
       />
       <label className={styles.label} htmlFor={`${label}-input`}>{label}</label>
     </div>

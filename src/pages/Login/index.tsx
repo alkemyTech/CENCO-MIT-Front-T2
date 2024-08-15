@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { Button, Input } from '../../components';
+import { Button, Input, PasswordInput } from '../../components';
 import { useLogin } from '../../hooks';
 
 export function Login() {
@@ -18,9 +18,8 @@ export function Login() {
           value={formData.email}
           handleOnChange={e => handleFieldChange('email', e)}
         />
-        <Input
+        <PasswordInput
           label={'Enter your password'}
-          type={'password'}
           placeholder=' '
           value={formData.password}
           handleOnChange={e => handleFieldChange('password', e)}

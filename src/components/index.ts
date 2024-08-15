@@ -10,3 +10,4 @@ export * from './ProfileImg';
 export * from './UserCard';
 export * from './DashboardAdmin';
 export * from './DashboardUser';
+export * from './PasswordInput'

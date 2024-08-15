@@ -32,8 +32,8 @@ export const userServices = {
     const url = `${baseUrl}/${users}/${id}`;
     return apiRequest(url, 'GET', undefined, token);
   },
-  getInfo: (token: string, id: string) => {
-    const url = `${baseUrl}/${users}/${id}/info`;
+  getInfo: (token: string) => {
+    const url = `${baseUrl}/${users}/info`;
     return apiRequest(url, 'GET', undefined, token);
   },
   create: (token: string, body: string) => {

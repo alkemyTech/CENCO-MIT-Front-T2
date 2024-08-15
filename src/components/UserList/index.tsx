@@ -1,6 +1,6 @@
 import styles from './style.module.css';
 import { User } from '../../interfaces/User';
-import { UserCard } from '../index';
+import { UserCard } from '../UserCard';
 
 export function UserList({ users }: { users: User[] }) {
     const sortedUsers = users.sort((a, b) => {

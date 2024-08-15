@@ -18,7 +18,7 @@ export function DashboardAdmin() {
     useEffect(() => {
             getAllUsers(searchTerm)
             setLoading(false)
-    }, [getAllUsers, searchTerm])
+    }, [searchTerm])
 
     return (
         <div className={styles.content}>

@@ -1,4 +1,4 @@
-export const validatePassword = (password: string): boolean => {
+export const isPasswordValid = (password: string): boolean => {
     const minLength = 8;
     const hasUpperCase = /[A-Z]/.test(password);
     const hasNumber = /\d/.test(password);

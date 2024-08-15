@@ -26,7 +26,7 @@ export function useDashborad() {
             })
 
             if (!response.ok) throw Error('Error fetching')
-            const data: Response = await response.json();
+            const data = await response.json();
             setUsers(data)
 
         } catch (error) {

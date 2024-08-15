@@ -47,7 +47,7 @@ export function UserCard({ user }: Props) {
                 <h5>Country: {user.country}</h5>
                 {
                     user.deletedDate &&
-                    (<h5>Deleted at: {user.deletedDate.toString()}</h5>)
+                    (<h5>Deleted at: {new Date(user.deletedDate).toLocaleDateString('es-ES')}</h5>)
                 }
             </div>
 

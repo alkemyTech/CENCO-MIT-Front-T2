@@ -16,8 +16,8 @@ export function DashboardAdmin() {
     const [word, setWord] = useState<string>('');
 
     useEffect(() => {
-        getAllUsers(searchTerm)
-        setLoading(false)
+            getAllUsers(searchTerm)
+            setLoading(false)
     }, [searchTerm])
 
     return (
@@ -47,7 +47,9 @@ export function DashboardAdmin() {
             </div>
             {
                 loading ? (
-                    <Loader />
+                    <div className={styles.loader}>
+                        <Loader />
+                    </div>
                 ) : (
                     <UserList users={users} />
                 )

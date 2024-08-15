@@ -6,7 +6,7 @@ type ButtonProps = {
   type?: 'submit' | 'reset' | 'button';
 };
 
-export default function Button({ label, onClick, type }: ButtonProps) {
+export function Button({ label, onClick, type }: ButtonProps) {
   return (
     <button
       className={styles.button}

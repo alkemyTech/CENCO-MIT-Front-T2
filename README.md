@@ -41,7 +41,12 @@ This project is a user management web application built using React and TypeScri
    ```bash
    pnpm install # or npm install
    ```
-3. Start the application:
+3. Create an environment variables (.env) file with the following variables:
+  ```env
+  VITE_BACKEND_URL=http://localhost:3000
+  VITE_LOGIN_URL=auth/login
+  ```   
+5. Start the application:
    ```bash
    pnpm run dev # or npm run dev
 

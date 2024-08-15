@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { isEmailValid } from '../../utils';
+import { isEmailValid } from '../validations';
 
 export function useLogin() {
   const navigate = useNavigate();

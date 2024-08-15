@@ -1,0 +1,27 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: var(--br-100);
+  background-color: var(--clr-primary-200);
+}
+
+.wrapper {
+  padding: var(--mg-200);
+  position: relative;
+  max-height: 80dvh;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: var(--mg-100);
+  cursor: pointer;
+  font-size: var(--fs-400);
+}
+
+.closeButton:hover{
+  filter: drop-shadow(0 0 0.2rem var(--clr-blue-600));
+  transform: scale(1.2);
+}

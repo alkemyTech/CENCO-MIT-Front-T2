@@ -1,0 +1,40 @@
+.button {
+  padding: var(--mg-50) var(--mg-100);
+  font-family: inherit;
+  font-size: var(--fs-300);
+  font-weight: var(--fw-bold);
+  color: var(--clr-primary-100);
+  background-color: var(--clr-blue-400);
+  border: 1px solid transparent;
+  border-radius: var(--br-100);
+  cursor: pointer;
+  transition: var(--all-25);
+  position: relative;
+  
+}
+
+.button:hover {
+  background-color: var(--clr-blue-300);
+  border-color: var(--clr-primary-400);
+}
+.button:focus,
+.button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  inset: 0;
+  scale: .8;
+  background: var(--clr-blue-200);
+  z-index: -1;
+  border-radius: 0;
+  filter: blur(.75rem);
+  transition: scale 500ms;
+}
+
+.button:hover::after {
+  scale:1
+}

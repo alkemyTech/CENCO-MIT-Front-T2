@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isEmailValid } from '../validations';
+import { authServices } from '../services';
 
 export function useLogin() {
   const navigate = useNavigate();
@@ -35,14 +36,7 @@ export function useLogin() {
       if(!isEmailValid(formData.email)) {
         throw new Error('Email must be valid')
       }
-      response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/${import.meta.env.VITE_LOGIN_URL}`, {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      });
-
+      response = await authServices.login(JSON.stringify(formData));
       const res = await response.json();
 
       let token: {

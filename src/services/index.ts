@@ -4,7 +4,7 @@ const users = import.meta.env.VITE_USERS_URL;
 
 type Method = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
-const apiRequest = async (
+const apiRequest = (
   url: string,
   method: Method,
   body?: BodyInit,
@@ -58,5 +58,5 @@ export const authServices = {
   login: (body: string) => {
     const url = `${baseUrl}/${login}`;
     return apiRequest(url, 'POST', body);
-  }
+  },
 };

@@ -1,4 +1,4 @@
-import { UserCard } from '../../components';
+import { UserCard } from '../index';
 import { User } from '../../interfaces/User';
 import styles from './style.module.css';
 

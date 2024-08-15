@@ -45,7 +45,10 @@ export function UserCard({ user }: Props) {
                 <h5>Email: {user.email}</h5>
                 <h5>Phone: {user.phone}</h5>
                 <h5>Country: {user.country}</h5>
-                <h5>Activo: {user.deletedDate}</h5>
+                {
+                    user.deletedDate &&
+                    (<h5>Deleted at: {user.deletedDate.toString()}</h5>)
+                }
             </div>
 
         </ div>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { NavItem } from '../NavItem';
 import styles from './style.module.css';
+import { faRightFromBracket, faUser, faGaugeHigh} from '@fortawesome/free-solid-svg-icons';
 
 export function Nav() {
   const isAdmin = sessionStorage.getItem('userRole')?.toString() === 'admin';
@@ -18,15 +19,18 @@ export function Nav() {
           <NavItem
             label={'Dashboard'}
             route={'/dashboard'}
+            icon={faGaugeHigh}
           />
         )}
         <NavItem
           label={'Profile'}
           route={'/profile'}
+          icon={faUser}
         />
         <NavItem
           label={'Logout'}
           route={'/'}
+          icon={faRightFromBracket}
         />
       </ul>
     </nav>

@@ -32,8 +32,14 @@
     height: 50vh;
 }
 
+h1 {
+    font-size: var(--fs-700);
+    font-weight: var(--fw-bold);
+}
+
 h2 {
     font-size: var(--fs-600);
+    font-weight: var(--fw-bold);
 }
 
 Input {

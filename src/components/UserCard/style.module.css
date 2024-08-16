@@ -4,6 +4,7 @@
     position: relative;
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
     padding: 30px;
+    background: var(--linear-gr-3);
     border-radius: 5px;
 }
 
@@ -14,7 +15,7 @@
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
     padding: 30px;
     filter: grayscale(100%);
-    background: rgba(192, 191, 191, 0.256);
+    background: var(--linear-gr-4);
     border-radius: 5px;
 }
 

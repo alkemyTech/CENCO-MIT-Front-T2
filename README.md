@@ -45,6 +45,7 @@ This project is a user management web application built using React and TypeScri
   ```env
   VITE_BACKEND_URL=http://localhost:3000
   VITE_LOGIN_URL=auth/login
+  VITE_DASHBOARD_ADMIN_URL=users
   ```   
 5. Start the application:
    ```bash

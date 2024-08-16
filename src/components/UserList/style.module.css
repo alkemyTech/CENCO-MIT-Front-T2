@@ -1,0 +1,18 @@
+.list {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .list {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .list {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}

@@ -37,6 +37,7 @@
     width: 180px;
     clip-path: circle(50% 50%);
     border-radius: 40%;
+    margin: auto;
 }
 
 .spacer {
@@ -78,4 +79,26 @@ h4 {
 
 h5 {
     text-align: start;
+}
+
+@media (max-width: 767px) {
+    .cardActive {
+        flex-direction: column;
+    }
+
+    .cardInactive {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cardHeader {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .picture {
+        padding-right: 0;
+    }
 }

@@ -17,10 +17,7 @@ export function UserCard({ user }: Props) {
             </div>
             <div className={styles.info}>
                 <div className={styles.cardHeader}>
-                    <div>
-                        <h3>{user.name} {user.surname}</h3>
-                        <h4>{user.id}</h4>
-                    </div>
+                    <h3>{user.name} {user.surname}</h3>
                     {
                         !user.deletedDate ?
                             (<div className={styles.buttons}>
@@ -40,6 +37,7 @@ export function UserCard({ user }: Props) {
                             <p className={styles.inactive}>Inactive User</p>
                     }
                 </div>
+                <h4>{user.id}</h4>
                 <div className={styles.underline}></div>
                 <h5>Rut: {user.rut}</h5>
                 <h5>Email: {user.email}</h5>

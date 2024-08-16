@@ -32,10 +32,9 @@ export function useLogin() {
   const handleLoginClick = async () => {
     let response: Response;
     try {
-      if (!isEmailValid(formData.email)) {
-        throw new Error('Email must be valid');
-      }
-      response = await authServices.login(JSON.stringify(formData));
+      if (!isEmailValid(formData.email)) throw new Error('Email must be valid');
+      const body = JSON.stringify(formData);
+      response = await authServices.login(body);
       const res = await response.json();
 
       let token: {

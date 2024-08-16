@@ -7,6 +7,7 @@ import {
   isRutValid,
 } from '../../validations';
 import { registerUser } from '../../services';
+import { Notification } from './Notification';
 import { validationMessages } from '../../constants/messages';
 
 type FormValues = {
@@ -33,6 +34,8 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   });
 
   const [errors, setErrors] = useState<Partial<FormValues>>({});
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
@@ -78,87 +81,102 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     try {
       const formData = { ...formValues, phone: Number(formValues.phone) };
       await registerUser(formData);
-      alert('User registered successfully');
-      onClose();
+      setNotificationMessage('User registered successfully');
+      setShowNotification(true);
     } catch (error: unknown) {
       if (error instanceof Error) {
-        alert(`Error: ${error.message}`);
+        setNotificationMessage(`Error: ${error.message}`);
+        setShowNotification(true);
       } else {
-        alert('Unknown error occurred during the request');
+        setNotificationMessage('Unknown error occurred during the request');
+        setShowNotification(true);
       }
     }
   };
 
+  const handleNotificationClose = () => {
+    setShowNotification(false);
+    setNotificationMessage('');
+  };
+
   return (
-    <Modal onClose={onClose}>
-      <h2>Register New User</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={formValues.name}
-          onChange={handleChange}
+    <>
+      {showNotification && (
+        <Notification
+          message={notificationMessage}
+          onClose={handleNotificationClose}
         />
-        {errors.name && <div>{errors.name}</div>}
+      )}
+      <Modal onClose={onClose}>
+        <h2>Register New User</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formValues.name}
+            onChange={handleChange}
+          />
+          {errors.name && <div>{errors.name}</div>}
 
-        <input
-          type="text"
-          name="surname"
-          placeholder="Surname"
-          value={formValues.surname}
-          onChange={handleChange}
-        />
-        {errors.surname && <div>{errors.surname}</div>}
+          <input
+            type="text"
+            name="surname"
+            placeholder="Surname"
+            value={formValues.surname}
+            onChange={handleChange}
+          />
+          {errors.surname && <div>{errors.surname}</div>}
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formValues.email}
-          onChange={handleChange}
-        />
-        {errors.email && <div>{errors.email}</div>}
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formValues.email}
+            onChange={handleChange}
+          />
+          {errors.email && <div>{errors.email}</div>}
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formValues.password}
-          onChange={handleChange}
-        />
-        {errors.password && <div>{errors.password}</div>}
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formValues.password}
+            onChange={handleChange}
+          />
+          {errors.password && <div>{errors.password}</div>}
 
-        <input
-          type="text"
-          name="country"
-          placeholder="Country"
-          value={formValues.country}
-          onChange={handleChange}
-        />
-        {errors.country && <div>{errors.country}</div>}
+          <input
+            type="text"
+            name="country"
+            placeholder="Country"
+            value={formValues.country}
+            onChange={handleChange}
+          />
+          {errors.country && <div>{errors.country}</div>}
 
-        <input
-          type="text"
-          name="rut"
-          placeholder="RUT"
-          value={formValues.rut}
-          onChange={handleChange}
-        />
-        {errors.rut && <div>{errors.rut}</div>}
+          <input
+            type="text"
+            name="rut"
+            placeholder="RUT"
+            value={formValues.rut}
+            onChange={handleChange}
+          />
+          {errors.rut && <div>{errors.rut}</div>}
 
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone Number"
-          value={formValues.phone}
-          onChange={handleChange}
-        />
-        {errors.phone && <div>{errors.phone}</div>}
+          <input
+            type="text"
+            name="phone"
+            placeholder="Phone Number"
+            value={formValues.phone}
+            onChange={handleChange}
+          />
+          {errors.phone && <div>{errors.phone}</div>}
 
-        <button type="submit">Register</button>
-      </form>
-    </Modal>
+          <button type="submit">Register</button>
+        </form>
+      </Modal>
+    </>
   );
 };
 

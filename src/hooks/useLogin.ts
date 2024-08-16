@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isEmailValid } from '../validations';
+import { authServices } from '../services';
 
 export function useLogin() {
   const navigate = useNavigate();
@@ -18,31 +19,22 @@ export function useLogin() {
         ...formData,
         email: (event.currentTarget as HTMLInputElement).value,
       });
-      setErrorLabel('')
+      setErrorLabel('');
     } else if (field === 'password') {
       setFormData({
         ...formData,
         password: (event.currentTarget as HTMLInputElement).value,
       });
-      setErrorLabel('')
+      setErrorLabel('');
     }
   };
 
   const handleLoginClick = async () => {
-    let response : Response;
-
+    let response: Response;
     try {
-      if(!isEmailValid(formData.email)) {
-        throw new Error('Email must be valid')
-      }
-      response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/${import.meta.env.VITE_LOGIN_URL}`, {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      });
-
+      if (!isEmailValid(formData.email)) throw new Error('Email must be valid');
+      const body = JSON.stringify(formData);
+      response = await authServices.login(body);
       const res = await response.json();
 
       let token: {
@@ -56,7 +48,9 @@ export function useLogin() {
       };
 
       if (response.ok) {
-        token = JSON.parse(decodeURIComponent(escape(atob(res.token.split('.')[1]))));
+        token = JSON.parse(
+          decodeURIComponent(escape(atob(res.token.split('.')[1])))
+        );
         sessionStorage.setItem('accessToken', res.token);
         sessionStorage.setItem('userId', token.id);
         sessionStorage.setItem('userName', token.name);
@@ -64,7 +58,7 @@ export function useLogin() {
         sessionStorage.setItem('userRole', token.role);
         navigate('/home');
       } else {
-        throw new Error(res.message)
+        throw new Error(res.message);
       }
     } catch (error) {
       if ((error as Error).message === 'Bad Request Exception') {

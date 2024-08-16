@@ -1,0 +1,7 @@
+.notFound {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  margin: 0 auto;
+  background: var(--linear-gr-1)
+}

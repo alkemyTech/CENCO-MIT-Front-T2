@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Login, Home, Profile, Dashboard, ErrorPage } from "../pages";
+import { NotFoundPage } from "../pages/NotFoundPage/index.";
 
 
 export const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
@@ -21,6 +22,11 @@ export const router: ReturnType<typeof createBrowserRouter> = createBrowserRoute
   {
     path: '/dashboard',
     element: <Dashboard />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: '/notFound',
+    element: <NotFoundPage />,
     errorElement: <ErrorPage />
   }
 ])

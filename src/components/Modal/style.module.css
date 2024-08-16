@@ -1,0 +1,47 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.modalContent {
+    background: white;
+    color: var(--clr-blue-300);
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    text-align: left;
+}
+.modalContent h2 {
+    margin-bottom: 20px; 
+    text-align: center; 
+}
+
+
+.modalClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modalContent form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

@@ -1,0 +1,36 @@
+.dashboard {
+  height: 50dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto;
+  gap: var(--mg-100);
+  color: var(--clr-primary-100);
+  position: relative;
+  border-radius: 1px;
+  border: 10px solid border #00008B;
+}
+
+.pictureSection {
+  margin: 25px 0px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+
+.personalInfoContainer {
+  margin: 0px 10px 10px;
+  flex-wrap: wrap;
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  width: 80%;
+  box-sizing: border-box;
+  border: 1px solid var(--clr-primary-100);
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+}

@@ -24,6 +24,11 @@ export function DashboardAdmin() {
     setIsModalOpen(false);
   };
 
+  const handleUserRegistered = () => {
+    getAllUsers(''); // Refresca la lista de usuarios después del registro exitoso
+    closeModal(); // Cierra el modal
+  };
+
   return (
     <div className={styles.content}>
       <h1>Dashboard Admin</h1>
@@ -43,11 +48,7 @@ export function DashboardAdmin() {
       </form>
       <div className={styles.listHeader}>
         <h2>User List</h2>
-        <Button
-          label={'Add User'}
-          onClick={openModal} // Abre el modal al hacer clic en "Add User"
-          type="button"
-        />
+        <Button label={'Add User'} onClick={openModal} type="button" />
       </div>
       {loading ? (
         <div className={styles.loader}>
@@ -57,8 +58,12 @@ export function DashboardAdmin() {
         <UserList users={users} />
       )}
 
-      {/* Renderiza el modal si isModalOpen es true */}
-      {isModalOpen && <RegisterModal onClose={closeModal} />}
+      {isModalOpen && (
+        <RegisterModal
+          onClose={closeModal}
+          onUserRegistered={handleUserRegistered}
+        />
+      )}
     </div>
   );
 }

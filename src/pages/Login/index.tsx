@@ -9,7 +9,9 @@ export function Login() {
   return (
     <main className={styles.login}>
       <form className={styles.form}>
-        <h1>Talent Manager</h1>
+        <h1 className={styles.title}>
+          <span>Talent</span>Manager
+        </h1>
         <h4>User management made simple.</h4>
         <Input
           label={'Enter your email'}

@@ -4,6 +4,25 @@
   justify-content: center;
 }
 
+.title {
+  text-decoration: underline;
+  padding: 0 1em;
+  align-self: center;
+  user-select: none;
+  color: var(--clr-blue-500);
+  margin: 0;
+  user-select: none;
+  float: left;
+  font-size: var(--fs-500);
+  font-weight: var(--fw-600);
+  align-self: center;
+  text-shadow: 0 2px 2px var(--clr-transparent-600);
+}
+
+.title span {
+  font-weight: 700;
+}
+
 .form {
   align-self: center;
   padding: 0 var(--mg-200);

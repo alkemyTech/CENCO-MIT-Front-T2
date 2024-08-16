@@ -6,7 +6,8 @@ import {
   isPhoneValid,
   isRutValid,
 } from '../../validations';
-import { registerUser } from '../../services';
+
+import { userServices } from '../../services';
 import { Notification } from './Notification';
 import { validationMessages } from '../../constants/messages';
 
@@ -80,7 +81,29 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
     try {
       const formData = { ...formValues, phone: Number(formValues.phone) };
-      await registerUser(formData);
+      const accessToken = sessionStorage.getItem('accessToken') || '';
+      const response = await userServices.create(
+        accessToken,
+        JSON.stringify(formData)
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        let errorMessage = validationMessages.badRequest;
+
+        if (errorData.additionalInfo && errorData.additionalInfo.message) {
+          const backendErrors = errorData.additionalInfo.message;
+          if (backendErrors.includes('rut already exist.')) {
+            errorMessage = validationMessages.rutExists;
+          }
+          if (backendErrors.includes('email already exist.')) {
+            errorMessage = validationMessages.emailExists;
+          }
+        }
+
+        throw new Error(errorMessage);
+      }
+
       setNotificationMessage('User registered successfully');
       setShowNotification(true);
     } catch (error: unknown) {

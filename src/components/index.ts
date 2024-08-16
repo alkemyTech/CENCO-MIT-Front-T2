@@ -7,7 +7,8 @@ export * from './Footer';
 export * from './Nav';
 export * from './NavItem';
 export * from './ProfileImg';
-export * from './UserCard';
+export * from './UserList';
 export * from './DashboardAdmin';
 export * from './DashboardUser';
-export * from './PasswordInput'
+export * from './PasswordInput';
+export * from './UserCard';

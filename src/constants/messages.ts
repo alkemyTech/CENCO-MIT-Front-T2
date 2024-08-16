@@ -10,4 +10,8 @@ export const validationMessages = {
     rutInvalid: 'Invalid RUT',
     phoneRequired: 'Phone number is required',
     phoneInvalid: 'Invalid phone number',
+    // Custom error messages from backend
+    rutExists: 'This RUT is already registered.',
+    emailExists: 'This email is already registered.',
+    badRequest: 'There was a problem with your submission. Please check your details and try again.',
 };

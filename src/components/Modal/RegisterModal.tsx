@@ -37,6 +37,7 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [errors, setErrors] = useState<Partial<FormValues>>({});
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
+  const [isSuccessful, setIsSuccessful] = useState(false); // Nuevo estado
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
@@ -105,13 +106,16 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       }
 
       setNotificationMessage('User registered successfully');
+      setIsSuccessful(true); // Marca que el registro fue exitoso
       setShowNotification(true);
     } catch (error: unknown) {
       if (error instanceof Error) {
         setNotificationMessage(`Error: ${error.message}`);
+        setIsSuccessful(false); // Marca que el registro falló
         setShowNotification(true);
       } else {
         setNotificationMessage('Unknown error occurred during the request');
+        setIsSuccessful(false); // Marca que el registro falló
         setShowNotification(true);
       }
     }
@@ -120,6 +124,9 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const handleNotificationClose = () => {
     setShowNotification(false);
     setNotificationMessage('');
+    if (isSuccessful) {
+      onClose(); // Solo cierra el modal si el registro fue exitoso
+    }
   };
 
   return (

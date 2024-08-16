@@ -1,0 +1,11 @@
+.profilePicture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profilePicture:hover {
+  transform: scale(1.1);
+}

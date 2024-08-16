@@ -1,4 +1,4 @@
-// import { Header } from '../../components';
+import { Header } from '../../components';
 import { useState } from 'react';
 import styles from './style.module.css';
 import RegisterModal from '../../components/Modal/RegisterModal';
@@ -19,7 +19,7 @@ export function Home() {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <main className={styles.home}>
         <h1>This is the home view</h1>
         <h2>{`Hello ${userName} ${userSurname}`}</h2>

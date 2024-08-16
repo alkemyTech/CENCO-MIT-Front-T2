@@ -28,6 +28,7 @@
     display: flex;
     justify-content: space-between;
     height: fit-content;
+    min-width: max-content;
 }
 
 .picture {
@@ -97,9 +98,5 @@ h5 {
         flex-direction: column-reverse;
         justify-content: space-between;
         gap: 10px;
-    }
-
-    .picture {
-        padding-right: 0;
     }
 }

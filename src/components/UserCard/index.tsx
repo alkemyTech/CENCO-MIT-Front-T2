@@ -1,5 +1,7 @@
+import { faTrash, faUserPen } from '@fortawesome/free-solid-svg-icons';
 import styles from './style.module.css';
-import avatar from '../../assets/img/default-avatar-profile.jpg';
+import avatarAdmin from '../../assets/img/avatarAdminB.png';
+import avatarUser from '../../assets/img/avatarUserB.png';
 import { Button } from '../../components';
 import { User } from '../../interfaces/User';
 
@@ -9,6 +11,7 @@ type Props = {
 
 export function UserCard({ user }: Props) {
     const status = !user.deletedDate ? styles.cardActive : styles.cardInactive
+    const avatar = user.role === 'admin' ? avatarAdmin : avatarUser
     return (
         <div className={status}>
             <div className={styles.picture}>
@@ -25,12 +28,15 @@ export function UserCard({ user }: Props) {
                                     label={'Edit'}
                                     onClick={() => alert('Editar Usuario!')}
                                     type='submit'
+                                    icon={faUserPen}
                                 />
                                 <div className={styles.spacer} />
                                 <Button
                                     label={'Delete'}
                                     onClick={() => alert('Eliminar usuario!')}
                                     type='submit'
+                                    icon={faTrash}
+                                    style={{ background: 'red' }}
                                 />
                             </div>
                             ) :

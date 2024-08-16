@@ -10,13 +10,14 @@
   cursor: pointer;
   transition: var(--all-25);
   position: relative;
-  
+
 }
 
 .button:hover {
   background-color: var(--clr-blue-300);
   border-color: var(--clr-primary-400);
 }
+
 .button:focus,
 .button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -36,5 +37,9 @@
 }
 
 .button:hover::after {
-  scale:1
+  scale: 1
+}
+
+.icon {
+  margin-left: var(--br-200);
 }

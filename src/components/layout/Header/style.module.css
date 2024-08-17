@@ -3,7 +3,7 @@
   background: var(--clr-blue-600);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 519px) {
   .header {
     position: absolute;
     bottom: 0;

@@ -56,7 +56,7 @@ export function useLogin() {
         sessionStorage.setItem('userName', token.name);
         sessionStorage.setItem('userSurname', token.surname);
         sessionStorage.setItem('userRole', token.role);
-        navigate('/home');
+        navigate('/dashboard');
       } else {
         throw new Error(res.message);
       }

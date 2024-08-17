@@ -3,7 +3,11 @@
   flex-flow: column nowrap;
   justify-content: center;
   margin: 0 auto;
+  padding-top: 60px;
   gap: var(--mg-100);
   min-width: 260px;
-  color: var(--clr-primary-100)
+  color: var(--clr-primary-100);
+  overflow-x: hidden;
+  height: calc(100dvh - 60px);
+  background-color: var(--clr-primary-100);
 }

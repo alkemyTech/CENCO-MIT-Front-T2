@@ -30,7 +30,7 @@
   bottom: 0;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 519px) {
   .notFound {
     display: flex;
     flex-direction: column-reverse;

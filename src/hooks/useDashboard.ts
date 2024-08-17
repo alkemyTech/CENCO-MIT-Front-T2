@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { User } from '../interfaces/User';
 import { userServices } from './../services'
 
-export function useDashborad() {
+export function useDashboard() {
 
     const [searchTerm, setSearchTerm] = useState('');
 

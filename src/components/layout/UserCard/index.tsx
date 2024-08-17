@@ -1,9 +1,9 @@
 import { faTrash, faUserPen } from '@fortawesome/free-solid-svg-icons';
 import styles from './style.module.css';
-import avatarAdmin from '../../assets/img/avatarAdminB.png';
-import avatarUser from '../../assets/img/avatarUserB.png';
-import { Button } from '../../components';
-import { User } from '../../interfaces/User';
+import avatarAdmin from '/src/assets/img/avatarAdminB.png';
+import avatarUser from '/src/assets/img/avatarUserB.png';
+import { Button } from '../..';
+import { User } from '../../../interfaces/User';
 
 type Props = {
     user: User
@@ -20,7 +20,7 @@ export function UserCard({ user }: Props) {
             </div>
             <div className={styles.info}>
                 <div className={styles.cardHeader}>
-                    <h3>{user.name} {user.surname}</h3>
+                    <h3 className={styles.h3}>{user.name} {user.surname}</h3>
                     {
                         !user.deletedDate ?
                             (<div className={styles.buttons}>
@@ -43,15 +43,15 @@ export function UserCard({ user }: Props) {
                             <p className={styles.inactive}>Inactive User</p>
                     }
                 </div>
-                <h4>{user.id}</h4>
+                <h4 className={styles.h4}>{user.id}</h4>
                 <div className={styles.underline}></div>
-                <h5>Rut: {user.rut}</h5>
-                <h5>Email: {user.email}</h5>
-                <h5>Phone: {user.phone}</h5>
-                <h5>Country: {user.country}</h5>
+                <h5 className={styles.h5}>Rut: {user.rut}</h5>
+                <h5 className={styles.h5}>Email: {user.email}</h5>
+                <h5 className={styles.h5}>Phone: {user.phone}</h5>
+                <h5 className={styles.h5}>Country: {user.country}</h5>
                 {
                     user.deletedDate &&
-                    (<h5>Deleted at: {new Date(user.deletedDate).toLocaleDateString('es-ES')}</h5>)
+                    (<h5  className={styles.h5}>Deleted at: {new Date(user.deletedDate).toLocaleDateString('es-ES')}</h5>)
                 }
             </div>
 

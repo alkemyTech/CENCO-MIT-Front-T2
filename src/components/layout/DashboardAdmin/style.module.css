@@ -1,7 +1,6 @@
 .content {
     color: var(--clr-blue-500);
     height: 100vh;
-    background-color: rgb(255, 255, 255);
 }
 
 .listHeader {
@@ -32,28 +31,28 @@
     height: 50vh;
 }
 
-h1 {
+.h1 {
     font-size: var(--fs-700);
     font-weight: var(--fw-bold);
 }
 
-h2 {
+.h2 {
     font-size: var(--fs-600);
     font-weight: var(--fw-bold);
 }
 
-Input {
+.input {
     width: 500px;
 }
 
-@media (min-width: 481px) and (max-width: 767px) {
+@media (min-width: 520px) and (max-width: 767px) {
     .form {
         padding: 0;
         margin-bottom: 20px;
     }
 
-    Input {
-        width: 300px;
+    .input {
+        width: 286px;
     }
 
     .listHeader {
@@ -65,14 +64,14 @@ Input {
     }
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (max-width: 519px) {
     .form {
         padding: 0;
         margin-bottom: 20px;
     }
 
-    Input {
-        width: 300px;
+    .input {
+        width: 286px;
     }
 
     .listHeader {

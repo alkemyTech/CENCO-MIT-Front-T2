@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Button, Input, Loader, UserList } from '../../components';
-import RegisterModal from '../../components/Modal/RegisterModal';
-import { useDashborad } from '../../hooks';
+import { Button, Input, Loader, UserList } from '../..';
+import RegisterModal from '../../global/Modal/RegisterModal';
+import { useDashboard } from '../../../hooks';
 import styles from './style.module.css';
 
 export function DashboardAdmin() {
-  const { searchTerm, users, handleSearchClick, getAllUsers } = useDashborad();
+  const { searchTerm, users, handleSearchClick, getAllUsers } = useDashboard();
 
   const [loading, setLoading] = useState(true);
   const [word, setWord] = useState<string>('');
@@ -31,7 +31,7 @@ export function DashboardAdmin() {
 
   return (
     <div className={styles.content}>
-      <h1>Dashboard Admin</h1>
+      <h1 className={styles.h1}>Your Dashboard</h1>
       <form className={styles.form}>
         <Input
           label={'Enter name, surname, email or country'}
@@ -39,6 +39,7 @@ export function DashboardAdmin() {
           placeholder=" "
           value={word}
           handleOnChange={(e) => setWord(e.target.value)}
+          className={styles.input}
         />
         <Button
           label={'Search'}
@@ -47,7 +48,7 @@ export function DashboardAdmin() {
         />
       </form>
       <div className={styles.listHeader}>
-        <h2>User List</h2>
+        <h2 className={styles.h2}>User List</h2>
         <Button label={'Add User'} onClick={openModal} type="button" />
       </div>
       {loading ? (

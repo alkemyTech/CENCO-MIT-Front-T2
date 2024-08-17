@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { User } from '../../interfaces/User';
+import { User } from '../../../interfaces/User';
 import { UserCard } from '../UserCard';
 
 export function UserList({ users }: { users: User[] }) {

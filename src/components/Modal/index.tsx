@@ -7,18 +7,18 @@ type ModalProps = {
 
 export function Modal({ children, onClose }: ModalProps) {
   return (
-    <div className={styles.modal}>
-      <div className={styles.wrapper}>
-        {onClose && (
-          <span
-            className={styles.closeButton}
-            onClick={onClose}
-          >
-            &times;
-          </span>
-        )}
-        {children}
+    <>
+      <div className={styles.modalOverlay} onClick={onClose}></div>{' '}
+      <div className={styles.modal}>
+        <div className={styles.wrapper}>
+          {onClose && (
+            <span className={styles.closeButton} onClick={onClose}>
+              &times;
+            </span>
+          )}
+          {children}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

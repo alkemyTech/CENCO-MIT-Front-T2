@@ -10,4 +10,5 @@ export * from './ProfileImg';
 export * from './UserList';
 export * from './DashboardAdmin';
 export * from './DashboardUser';
-export * from './PasswordInput'
+export * from './PasswordInput';
+export * from './UserCard';

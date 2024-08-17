@@ -5,6 +5,17 @@
   transform: translate(-50%, -50%);
   border-radius: var(--br-100);
   background-color: var(--clr-primary-200);
+  z-index: 1000;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 999; 
 }
 
 .wrapper {
@@ -24,4 +35,16 @@
 .closeButton:hover{
   filter: drop-shadow(0 0 0.2rem var(--clr-blue-600));
   transform: scale(1.2);
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 1001; 
 }

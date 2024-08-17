@@ -25,7 +25,7 @@ export const router: ReturnType<typeof createBrowserRouter> = createBrowserRoute
     errorElement: <ErrorPage />
   },
   {
-    path: '/notFound',
+    path: '*',
     element: <NotFoundPage />,
     errorElement: <ErrorPage />
   }

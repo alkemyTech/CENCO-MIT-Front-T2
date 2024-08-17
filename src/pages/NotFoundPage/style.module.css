@@ -30,11 +30,6 @@
   bottom: 0;
 }
 
-Button {
-  background: red;
-  font-size: var(--fs-900);
-}
-
 @media (max-width: 480px) {
   .notFound {
     display: flex;

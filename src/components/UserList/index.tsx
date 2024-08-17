@@ -9,8 +9,8 @@ export function UserList({ users }: { users: User[] }) {
 
     return (
         <div className={styles.list}>
-            {sortedUsers.map((user) => {
-                return <UserCard user={user} />
+            {sortedUsers.map((user, index) => {
+                return <UserCard user={user} key={index} />
             })}
         </div>
     )

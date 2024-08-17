@@ -40,12 +40,15 @@
 
   /* -------- TRANSPARENT COLOR -------- */
   --clr-transparent-200: rgb(255, 255, 255, 0.7);
+  --clr-transparent-300: rgb(192, 191, 191, 0.256);
   --clr-transparent-400: rgb(84, 84, 84, 0.6);
   --clr-transparent-600: rgb(0,0,0,0.5);
 
   /* -------- LINEAR GRADIENTS -------- */
   --linear-gr-1: linear-gradient(to bottom, var(--clr-blue-400) 35%, var(--clr-blue-500) 100%);
   --linear-gr-2: linear-gradient(to bottom, var(--clr-blue-300) 35%, var(--clr-blue-400) 100%);
+  --linear-gr-3: linear-gradient(to bottom, var(--clr-primary-100) 35%, var(--clr-primary-300) 100%);
+  --linear-gr-4: linear-gradient(to bottom, var(--clr-primary-100) 35%, var(--clr-transparent-400) 100%);
 
   /* -------- BORDER RADIUS -------- */
   --br-50: 3px;

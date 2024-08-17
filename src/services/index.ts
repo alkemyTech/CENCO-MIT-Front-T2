@@ -24,7 +24,7 @@ const apiRequest = (
 export const userServices = {
   getAll: async (token: string, search?: string) => {
     const url = search
-      ? `${baseUrl}/${users}search=${encodeURIComponent(search)}`
+      ? `${baseUrl}/${users}?search=${encodeURIComponent(search)}`
       : `${baseUrl}/${users}`;
     return apiRequest(url, 'GET', undefined, token);
   },

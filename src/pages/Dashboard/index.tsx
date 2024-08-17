@@ -1,9 +1,9 @@
 import { DashboardAdmin } from '../../components';
 import styles from './style.module.css'
 
-const userRole = sessionStorage.getItem('userRole')?.toLocaleString();
-
 export function Dashboard() {
+  const userRole = sessionStorage.getItem('userRole')?.toLocaleString();
+
   return (
     <main className={styles.dashboard}>
       {

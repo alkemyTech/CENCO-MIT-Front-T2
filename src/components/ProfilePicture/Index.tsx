@@ -1,11 +1,10 @@
 import styles from "./style.module.css";
+import { FC } from "react";
 
-const ProfilePicture: React.FC = () => {
+export const ProfilePicture: FC = () => {
   return (
-    <main>
+    <div>
       <img src="public\Img\profilepicturedefault.png" alt="Default Profile Picture" className={styles.profilePicture} />
-    </main>
+    </div>
   );
 }
-
-export default ProfilePicture;

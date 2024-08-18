@@ -4,4 +4,5 @@ export * from './isPasswordValid';
 export * from './isPhoneValid';
 export * from './decodeToken';
 export * from './arePasswordsEqual';
-export * from './isTokenExpired'
+export * from './isTokenExpired';
+export * from './isNameValid';

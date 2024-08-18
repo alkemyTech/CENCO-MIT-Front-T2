@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { NavItem } from '../../globals/NavItem';
+import { NavItem } from '../globals/NavItem';
 import styles from './style.module.css';
 import {
   faRightFromBracket,
   faGaugeHigh,
 } from '@fortawesome/free-solid-svg-icons';
-import { useLogout } from '../../../hooks/useLogout';
+import { useLogout } from '../../hooks';
 
 export function Nav() {
 

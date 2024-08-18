@@ -5,11 +5,11 @@ import {
   isPasswordValid,
   isPhoneValid,
   isRutValid,
-} from '../../../validations';
+} from '../../validations';
 
-import { userServices } from '../../../services';
+import { userServices } from '../../services';
 import { Notification } from './Notification';
-import { validationMessages } from '../../../constants/messages';
+import { validationMessages } from '../../constants/messages';
 
 type FormValues = {
   name: string;

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Loader } from '../..';
+import { Loader } from '..';
 import styles from './style.module.css';
-import { userServices } from '../../../services';
+import { userServices } from '../../services';
 import { useNavigate } from 'react-router-dom';
-import { User } from '../../../interfaces/User';
+import { User } from '../../interfaces/User';
 
 export function DashboardUser() {
   const navigate = useNavigate();

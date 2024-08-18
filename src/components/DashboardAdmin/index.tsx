@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Button, Input, Loader, UserList } from '../..';
-import RegisterModal from '../../global/Modal/RegisterModal';
-import { useDashboard } from '../../../hooks';
+import { Button, Input, Loader, UserList } from '..';
+import RegisterModal from '../Modal/RegisterModal';
+import { useDashboard } from '../../hooks';
 import styles from './style.module.css';
 
 export function DashboardAdmin() {

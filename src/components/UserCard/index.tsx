@@ -2,8 +2,8 @@ import { faTrash, faUserPen } from '@fortawesome/free-solid-svg-icons';
 import styles from './style.module.css';
 import avatarAdmin from '/src/assets/img/avatarAdminB.png';
 import avatarUser from '/src/assets/img/avatarUserB.png';
-import { Button } from '../..';
-import { User } from '../../../interfaces/User';
+import { Button } from '..';
+import { User } from '../../interfaces/User';
 
 type Props = {
     user: User

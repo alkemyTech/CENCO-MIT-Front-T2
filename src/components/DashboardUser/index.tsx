@@ -13,10 +13,10 @@ export function DashboardUser() {
   });
 
   useEffect(() => {
-    const token = sessionStorage.getItem('accessToken')!.toLocaleString();
+    const token = sessionStorage.getItem('accessToken')!
     if (!token) navigate('/');
     const data = async () => {
-      const response = await userServices.getInfo(token);
+      const response = await userServices.getInfo(token.toLocaleString());
       setInfo(await response.json());
     };
     data();

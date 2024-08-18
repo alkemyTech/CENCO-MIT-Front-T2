@@ -1,14 +1,19 @@
 import styles from "../ContactUser/style.module.css";
 
-export function CardContact() {
+interface CardContactProps {
+  phone: string;
+  email?: string; 
+}
+
+export function CardContact({ phone, email }: CardContactProps) {
   return (
     <main className={styles.container}>
-        <h2> Datos de contacto </h2>
+      <h2>Datos de contacto</h2>
       <p>
-        <strong>Telefono: </strong> (+44) 20 7183 4567
+        <strong>Teléfono:</strong> {phone}
       </p>
       <p>
-        <strong>Correo Electronico:</strong> hermione.granger@hogwarts.edus
+        <strong>Correo Electrónico:</strong> {email}
       </p>
     </main>
   );

@@ -1,21 +1,38 @@
 import styles from "./style.module.css";
 
-export function CardInfoUser() {
+interface CardInfoUserProps {
+  name: string;
+  surname: string;
+  phone: string;
+  rut?: string;
+  pais?: string;
+}
+
+export function CardInfoUser({
+  name,
+  surname,
+  phone,
+  rut,
+  pais,
+}: CardInfoUserProps) {
   return (
     <main className={styles.container}>
-        <h2>Informacion de usuario</h2>
-        <p>
-          <strong>Nombre:</strong> Hermione
-        </p>
-        <p>
-          <strong>Apellido:</strong> Granger
-        </p>
-        <p>
-          <strong>RUT:</strong> 12.345.678-9
-        </p>
-        <p>
-          <strong>País:</strong> Reino Unido
-          </p>
+      <h2>Información de usuario</h2>
+      <p>
+        <strong>Nombre:</strong> {name}
+      </p>
+      <p>
+        <strong>Apellido:</strong> {surname}
+      </p>
+      <p>
+        <strong>Teléfono:</strong> {phone}
+      </p>
+      <p>
+        <strong>RUT:</strong> {rut}
+      </p>
+      <p>
+        <strong>País:</strong> {pais}
+      </p>
     </main>
   );
 }

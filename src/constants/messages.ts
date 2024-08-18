@@ -14,4 +14,8 @@ export const validationMessages = {
     rutExists: 'This RUT is already registered.',
     emailExists: 'This email is already registered.',
     badRequest: 'There was a problem with your submission. Please check your details and try again.',
+    // New messages for confirmation
+    confirmUpdate: 'Are you sure you want to update this user?',
+    updateSuccess: 'User updated successfully',
+    updateError: 'There was an error updating the user',
 };

@@ -26,7 +26,7 @@ export function Login() {
           value={formData.password}
           handleOnChange={e => handleFieldChange('password', e)}
         />
-        <label className={styles.labelErrorLogin}>{errorLabel}</label>
+        <p className={styles.labelErrorLogin}>{errorLabel}</p>
         <Button
           label={'Login'}
           onClick={handleLoginClick}

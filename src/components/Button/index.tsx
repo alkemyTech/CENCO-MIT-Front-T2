@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type ButtonProps = {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   type?: 'submit' | 'reset' | 'button';
   icon?: IconDefinition;
   style?: React.CSSProperties;

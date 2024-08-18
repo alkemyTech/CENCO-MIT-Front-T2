@@ -1,12 +1,9 @@
 .dashboard {
-  height: 100dvh;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  align-items: center;
   margin: 0 auto;
   gap: var(--mg-100);
   min-width: 260px;
-  max-width: 500px;
   color: var(--clr-primary-100)
 }

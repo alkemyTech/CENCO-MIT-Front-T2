@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Login, Home, Profile, Dashboard, ErrorPage, } from "../pages";
-import { DashboardUser } from "../components/DashboardUser";
-
+import { NotFoundPage } from "../pages/NotFoundPage/index.";
 
 export const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
   {
@@ -10,18 +9,13 @@ export const router: ReturnType<typeof createBrowserRouter> = createBrowserRoute
     errorElement: <ErrorPage />
   },
   {
-    path: '/home',
-    element: <Home />,
-    errorElement: <ErrorPage />
-  },
-  {
-    path: '/profile',
-    element: <Profile />,
-    errorElement: <ErrorPage />
-  },
-  {
     path: '/dashboard',
-    element: <DashboardUser />,
+    element: <Dashboard />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
     errorElement: <ErrorPage />
   }
 

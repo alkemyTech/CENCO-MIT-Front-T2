@@ -1,15 +1,19 @@
-import { DashboardUser } from "../../components/DashboardUser";
 import styles from "./style.module.css";
+import { DashboardUser } from "../../components/DashboardUser";
+import { DashboardAdmin } from '../../components';
 
-const userRole = sessionStorage.getItem("userRole")?.toLocaleString();
 export function Dashboard() {
+  const userRole = sessionStorage.getItem('userRole')?.toLocaleString();
+
   return (
     <main className={styles.dashboard}>
-      {userRole === "user" ? (
-        <DashboardUser />
-      ) : (
-        <h1>This is the dashboard admin view</h1>
-      )}
+      {
+        userRole === 'admin' ? (
+          <DashboardAdmin />
+        ) : (
+          <DashboardUser />
+        )
+      }
     </main>
   );
 }

@@ -1,0 +1,85 @@
+.content {
+    color: var(--clr-blue-500);
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+}
+
+.listHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.form {
+    padding: 0 var(--mg-200);
+    display: flex;
+    flex-flow: column wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: var(--mg-100);
+    min-width: 260px;
+    margin: 20px;
+    border: 5px;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+h1 {
+    font-size: var(--fs-700);
+    font-weight: var(--fw-bold);
+}
+
+h2 {
+    font-size: var(--fs-600);
+    font-weight: var(--fw-bold);
+}
+
+Input {
+    width: 500px;
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .form {
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    Input {
+        width: 300px;
+    }
+
+    .listHeader {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .form {
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    Input {
+        width: 300px;
+    }
+
+    .listHeader {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}

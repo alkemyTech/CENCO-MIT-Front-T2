@@ -1,0 +1,12 @@
+.header {
+  margin: 0 auto;
+  background: var(--clr-blue-600);
+}
+
+@media (max-width: 768px) {
+  .header {
+    position: absolute;
+    bottom: 0;
+    width: 100dvw;
+  }
+}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from './index';
 import { isEmailValid, isPhoneValid } from '../../validations';
 import { userServices } from '../../services';
-import { Notification } from './Notification';
+import { Confirm} from './Confirm';
 import { validationMessages } from '../../constants/messages';
 
 type FormValues = {
@@ -33,6 +33,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
   const [isSuccessful, setIsSuccessful] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false); // Estado para controlar la confirmación
 
   useEffect(() => {
     setFormValues(user);
@@ -69,6 +70,10 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
     e.preventDefault();
     if (!validate()) return;
 
+    setShowConfirm(true); // Muestra el modal de confirmación antes de enviar la solicitud
+  };
+
+  const handleConfirmUpdate = async () => {
     try {
       const formData = { ...formValues, phone: Number(formValues.phone) };
       const accessToken = sessionStorage.getItem('accessToken') || '';
@@ -92,7 +97,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
         throw new Error(errorMessage);
       }
 
-      setNotificationMessage('User updated successfully');
+      setNotificationMessage(validationMessages.updateSuccess);
       setIsSuccessful(true);
       setShowNotification(true);
       onUserUpdated(); // Llama al callback para actualizar la lista de usuarios
@@ -102,10 +107,12 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
         setIsSuccessful(false);
         setShowNotification(true);
       } else {
-        setNotificationMessage('Unknown error occurred during the request');
+        setNotificationMessage(validationMessages.updateError);
         setIsSuccessful(false);
         setShowNotification(true);
       }
+    } finally {
+      setShowConfirm(false); // Oculta el modal de confirmación
     }
   };
 
@@ -117,13 +124,26 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
     }
   };
 
+  const handleConfirmClose = () => {
+    setShowConfirm(false); // Cierra el modal de confirmación sin actualizar
+  };
+
   return (
     <>
       {showNotification && (
-        <Notification
+        <Confirm
           message={notificationMessage}
           onClose={handleNotificationClose}
         />
+      )}
+      {showConfirm && (
+        <Confirm
+          message={validationMessages.confirmUpdate}
+          onClose={handleConfirmClose}
+        >
+          <button onClick={handleConfirmUpdate}>Confirm</button>
+          <button onClick={handleConfirmClose}>Cancel</button>
+        </Confirm>
       )}
       <Modal onClose={onClose}>
         <h2>Edit User</h2>

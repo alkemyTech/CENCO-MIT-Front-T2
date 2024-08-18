@@ -1,6 +1,6 @@
 import styles from './style.module.css'
 import { useNavigate, useRouteError, isRouteErrorResponse } from 'react-router-dom';
-import Button from '../../components/Button';
+import { Button } from '../../components';
 
 export function ErrorPage() {
   const navigate = useNavigate();

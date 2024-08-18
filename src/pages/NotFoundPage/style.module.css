@@ -1,0 +1,59 @@
+.content {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100vh;
+  margin: 0 auto;
+  background: var(--linear-gr-1)
+}
+
+.notFound {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding-bottom: 50%;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+}
+
+.err {
+  position: absolute;
+  width: 45%;
+  left: calc(15%);
+  bottom: 20%;
+}
+
+.img {
+  position: absolute;
+  width: 50%;
+  right: 0;
+  bottom: 0;
+}
+
+@media (max-width: 480px) {
+  .notFound {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    padding-bottom: 0;
+    justify-content: flex-end;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .err {
+    position: relative;
+    width: 100%;
+    align-self: center;
+    left: 0;
+    top: 0;
+  }
+
+  .img {
+    position: relative;
+    align-self: flex-end;
+    width: 80%;
+    right: 0;
+    bottom: 0;
+  }
+}

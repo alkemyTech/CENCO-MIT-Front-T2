@@ -1,20 +1,25 @@
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import styles from './style.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type ButtonProps = {
   label: string;
   onClick: () => void;
   type?: 'submit' | 'reset' | 'button';
+  icon?: IconDefinition;
+  style?: React.CSSProperties;
 };
 
-export default function Button({ label, onClick, type }: ButtonProps) {
+export function Button({ label, onClick, type, icon, style }: ButtonProps) {
   return (
     <button
       className={styles.button}
       onClick={onClick}
       type={type || 'button'}
       aria-label={`${label} button`}
+      style={style}
     >
-      {label}
+      {label} {icon && <FontAwesomeIcon icon={icon} />}
     </button>
   );
 }

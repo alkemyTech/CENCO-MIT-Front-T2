@@ -8,5 +8,40 @@
   gap: var(--mg-100);
   min-width: 260px;
   max-width: 500px;
-  color: var(--clr-primary-100)
+  color: var(--clr-blue-400);
+  background-color: var(--clr-primary-100);
+}
+
+/* Styles for buttons */
+button {
+  background-color: var(--clr-blue-400); /* Set the background color to blue */
+  color: white; /* Make the text white for contrast */
+  border: none; /* Remove default border */
+  padding: 0.5rem 1rem; /* Add some padding for better spacing */
+  font-size: 1rem; /* Adjust the font size */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  border-radius: 5px; /* Add rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+button:hover {
+  background-color: var(--clr-blue-500); /* Slightly darker blue on hover */
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mg-100); /* Adds space between the input fields */
+  width: 100%; /* Make the form take the full width of its container */
+}
+
+input {
+  padding: 0.5rem; /* Adds some padding inside the input fields */
+  font-size: 1rem; /* Adjusts the font size */
+  border: 1px solid var(--clr-blue-400); /* Adds a border to the input fields */
+  border-radius: 5px; /* Rounds the corners of the input fields */
+}
+
+button[type="submit"] {
+  margin-top: var(--mg-100); /* Adds some space above the submit button */
+  margin-bottom: 10px;
 }

@@ -1,18 +1,21 @@
 import styles from './style.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 
 type InputProps = {
   label: string;
-  type: string; // can be text, email, password, number, etc.
   value:string;
   placeholder?: string; // optional
   handleOnChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // optional
 };
 
-export function Input({ label, type, value, placeholder, handleOnChange }: InputProps) {
+export function PasswordInput({ label, value, placeholder, handleOnChange }: InputProps) {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   return (
     <div className={styles.wrapper}>
       <input
-        type={type}
+        type={showPassword ? "text" : "password"}
         className={styles.content + styles.input}
         id={`${label}-input`}
         name={`${label}-input`}
@@ -22,7 +25,16 @@ export function Input({ label, type, value, placeholder, handleOnChange }: Input
         aria-label={`${label} input`}
         autoComplete="new-password"
       />
+      <span className={styles.icon}>
+        {
+          <FontAwesomeIcon
+            icon={showPassword ? faEyeSlash : faEye}
+            onClick={() => setShowPassword(!showPassword)}
+          />
+        }
+      </span>
       <label className={styles.label} htmlFor={`${label}-input`}>{label}</label>
+      
     </div>
   );
 }

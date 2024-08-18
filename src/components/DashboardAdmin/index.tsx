@@ -3,18 +3,29 @@ import { Button, Input, Loader, UserList } from '..';
 import RegisterModal from '../Modal/RegisterModal';
 import { useDashboard } from '../../hooks';
 import styles from './style.module.css';
+import { useNavigate } from 'react-router-dom';
+import { isTokenExpired } from '../../validations';
+import { useLogout } from '../../hooks/useLogout';
 
 export function DashboardAdmin() {
+  const navigate = useNavigate();
   const { searchTerm, users, handleSearchClick, getAllUsers } = useDashboard();
+  const { handleLogout } = useLogout();
 
   const [loading, setLoading] = useState(true);
   const [word, setWord] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar el modal
 
   useEffect(() => {
+    const token = sessionStorage.getItem('accessToken');
+    if (!token || isTokenExpired(token)) {
+      handleLogout();
+      navigate('/')
+    }
+
     getAllUsers(searchTerm);
     setLoading(false);
-  }, [searchTerm]);
+  }, [navigate, searchTerm]);
 
   const openModal = () => {
     setIsModalOpen(true);

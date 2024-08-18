@@ -5,17 +5,12 @@ import {
   faRightFromBracket,
   faGaugeHigh,
 } from '@fortawesome/free-solid-svg-icons';
+import { useLogout } from '../../hooks/useLogout';
 
 export function Nav() {
-  
-  const handleLogout = () => {
-    sessionStorage.removeItem('accessToken');
-    sessionStorage.removeItem('userId');
-    sessionStorage.removeItem('userName');
-    sessionStorage.removeItem('userSurname');
-    sessionStorage.removeItem('userRole');
-  }
 
+  const { handleLogout } = useLogout();
+  
   return (
     <nav className={styles.nav}>
       <Link

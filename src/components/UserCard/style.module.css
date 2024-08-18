@@ -18,6 +18,7 @@
     filter: grayscale(100%);
     background: var(--linear-gr-4);
     border-radius: 5px;
+    gap:30px;
 }
 
 .cardHeader {

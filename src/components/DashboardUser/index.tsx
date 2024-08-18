@@ -4,6 +4,7 @@ import styles from './style.module.css';
 import { userServices } from '../../services';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../interfaces/User';
+import { isTokenExpired } from '../../validations';
 
 export function DashboardUser() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ export function DashboardUser() {
   useEffect(() => {
     const token = sessionStorage.getItem('accessToken')!
     if (!token) navigate('/');
+    if(isTokenExpired(token)) navigate('/');
     const data = async () => {
       const response = await userServices.getInfo(token.toLocaleString());
       setInfo(await response.json());

@@ -1,14 +1,27 @@
+<<<<<<<< HEAD:src/components/RegisterModal/index.tsx
 import styles from './style.module.css';
 import { FC, useState } from 'react';
+========
+import React, { useState } from 'react';
+import { Modal } from '../Modal';
+>>>>>>>> a4e42a5 (rebase):src/components/global/Modal/RegisterModal.tsx
 import {
   isEmailValid,
   isPasswordValid,
   isPhoneValid,
   isRutValid,
+<<<<<<<< HEAD:src/components/RegisterModal/index.tsx
 } from '../../validations';
 import { userServices } from '../../services';
+import { Button, Modal, Notification } from '../index';
 import { validationMessages } from '../../constants/messages';
-import { Modal, Button, Notification } from '../index';
+========
+} from '../../../validations';
+
+import { userServices } from '../../../services';
+import { Notification } from './Notification';
+import { validationMessages } from '../../../constants/messages';
+>>>>>>>> a4e42a5 (rebase):src/components/global/Modal/RegisterModal.tsx
 
 type FormValues = {
   name: string;
@@ -23,7 +36,11 @@ type FormValues = {
 
 type RegisterModalProps = {
   onClose: () => void;
+<<<<<<<< HEAD:src/components/RegisterModal/index.tsx
   onUserRegistered: () => void;
+========
+  onUserRegistered: () => void; // Nuevo callback
+>>>>>>>> a4e42a5 (rebase):src/components/global/Modal/RegisterModal.tsx
 };
 
 export const RegisterModal: FC<RegisterModalProps> = ({
@@ -115,7 +132,11 @@ export const RegisterModal: FC<RegisterModalProps> = ({
       setNotificationMessage('User registered successfully');
       setIsSuccessful(true);
       setShowNotification(true);
+<<<<<<<< HEAD:src/components/RegisterModal/index.tsx
       onUserRegistered();
+========
+      onUserRegistered(); // Llama al callback para actualizar la lista de usuarios
+>>>>>>>> a4e42a5 (rebase):src/components/global/Modal/RegisterModal.tsx
     } catch (error: unknown) {
       if (error instanceof Error) {
         setNotificationMessage(`Error: ${error.message}`);
@@ -133,7 +154,11 @@ export const RegisterModal: FC<RegisterModalProps> = ({
     setShowNotification(false);
     setNotificationMessage('');
     if (isSuccessful) {
+<<<<<<<< HEAD:src/components/RegisterModal/index.tsx
       onClose();
+========
+      onClose(); // Solo cierra el modal si el registro fue exitoso
+>>>>>>>> a4e42a5 (rebase):src/components/global/Modal/RegisterModal.tsx
     }
   };
 

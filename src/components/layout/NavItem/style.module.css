@@ -1,0 +1,37 @@
+.listItem {
+  font-size: 14px;
+  color: var(--clr-primary-200);
+  opacity: 0.6;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  text-wrap: nowrap;
+  padding: 1.4em;
+  user-select: none;
+  transition: all 200ms ease-in-out;
+}
+
+.link:hover > .listItem {
+  opacity: .8;
+  text-shadow: 0 0 10px var(--clr-transparent-200);
+}
+
+.icon {
+  display: none;
+}
+
+@media (max-width: 519px) {
+  .listItem {
+    padding: .2em 1em;
+  }
+  .link:hover > .icon,
+  .link:hover > .listItem  {
+    opacity: .8;
+    text-shadow: 0 0 10px var(--clr-transparent-200);
+  }
+
+  .icon {
+    display:inline;
+    color: var(--clr-primary-200);
+    opacity: 0.6;
+  }
+}

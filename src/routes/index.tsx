@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Login, Dashboard, NotFoundPage, ErrorPage } from "../pages";
 
-
 export const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
   {
     path: '/',

@@ -51,6 +51,7 @@ const RegisterModal: FC<RegisterModalProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    setErrors({});
   };
 
   const validate = () => {

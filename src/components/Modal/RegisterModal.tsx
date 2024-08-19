@@ -170,6 +170,7 @@ const RegisterModal: FC<RegisterModalProps> = ({
             placeholder='Email'
             value={formValues.email}
             onChange={handleChange}
+            autoComplete={'new-password'}
           />
         
           <input
@@ -178,6 +179,7 @@ const RegisterModal: FC<RegisterModalProps> = ({
             placeholder='Password'
             value={formValues.password}
             onChange={handleChange}
+            autoComplete={'new-password'}
           />
 
           <input

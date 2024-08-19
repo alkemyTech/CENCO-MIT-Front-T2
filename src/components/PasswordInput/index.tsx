@@ -7,10 +7,10 @@ type InputProps = {
   label: string;
   value:string;
   placeholder?: string; // optional
-  handleOnChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // optional
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // optional
 };
 
-export function PasswordInput({ label, value, placeholder, handleOnChange }: InputProps) {
+export function PasswordInput({ label, value, placeholder, onChange }: InputProps) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   return (
     <div className={styles.wrapper}>
@@ -20,7 +20,7 @@ export function PasswordInput({ label, value, placeholder, handleOnChange }: Inp
         id={`${label}-input`}
         name={`${label}-input`}
         value={value}
-        onChange={handleOnChange}
+        onChange={onChange}
         placeholder={placeholder}
         aria-label={`${label} input`}
         autoComplete="new-password"

@@ -24,7 +24,7 @@ export function Login() {
           label={'Enter your password'}
           placeholder=' '
           value={formData.password}
-          handleOnChange={e => handleFieldChange('password', e)}
+          onChange={e => handleFieldChange('password', e)}
         />
         <p className={styles.labelErrorLogin}>{errorLabel}</p>
         <Button

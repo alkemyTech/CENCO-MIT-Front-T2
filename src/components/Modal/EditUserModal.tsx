@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from './index';
 import { isEmailValid, isPhoneValid } from '../../validations';
 import { userServices } from '../../services';
-import { Confirm} from './Confirm';
+import { Confirm } from './Confirm';
 import { validationMessages } from '../../constants/messages';
 
 type FormValues = {
@@ -19,7 +19,7 @@ type FormValues = {
 type EditUserModalProps = {
   user: FormValues;
   onClose: () => void;
-  onUserUpdated: () => void; // Callback para actualizar la lista de usuarios
+  onUserUpdated: () => void;
 };
 
 const EditUserModal: React.FC<EditUserModalProps> = ({
@@ -28,12 +28,11 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
   onUserUpdated,
 }) => {
   const [formValues, setFormValues] = useState<FormValues>(user);
-
   const [errors, setErrors] = useState<Partial<FormValues>>({});
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
   const [isSuccessful, setIsSuccessful] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false); // Estado para controlar la confirmación
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     setFormValues(user);
@@ -70,12 +69,23 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
     e.preventDefault();
     if (!validate()) return;
 
-    setShowConfirm(true); // Muestra el modal de confirmación antes de enviar la solicitud
+    setShowConfirm(true);
   };
 
   const handleConfirmUpdate = async () => {
     try {
-      const formData = { ...formValues, phone: Number(formValues.phone) };
+      // Solo incluir los campos que han cambiado
+      const updatedFields: Partial<FormValues> = {};
+      Object.keys(formValues).forEach((key) => {
+        if (
+          formValues[key as keyof FormValues] !== user[key as keyof FormValues]
+        ) {
+          updatedFields[key as keyof FormValues] =
+            formValues[key as keyof FormValues];
+        }
+      });
+
+      const formData = { ...updatedFields, phone: Number(formValues.phone) };
       const accessToken = sessionStorage.getItem('accessToken') || '';
       const response = await userServices.update(
         accessToken,
@@ -100,7 +110,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
       setNotificationMessage(validationMessages.updateSuccess);
       setIsSuccessful(true);
       setShowNotification(true);
-      onUserUpdated(); // Llama al callback para actualizar la lista de usuarios
+      onUserUpdated();
     } catch (error: unknown) {
       if (error instanceof Error) {
         setNotificationMessage(`Error: ${error.message}`);
@@ -112,7 +122,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
         setShowNotification(true);
       }
     } finally {
-      setShowConfirm(false); // Oculta el modal de confirmación
+      setShowConfirm(false);
     }
   };
 
@@ -120,12 +130,12 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
     setShowNotification(false);
     setNotificationMessage('');
     if (isSuccessful) {
-      onClose(); // Solo cierra el modal si la actualización fue exitosa
+      onClose();
     }
   };
 
   const handleConfirmClose = () => {
-    setShowConfirm(false); // Cierra el modal de confirmación sin actualizar
+    setShowConfirm(false);
   };
 
   return (

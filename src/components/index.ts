@@ -11,3 +11,8 @@ export * from './UserList';
 export * from './DashboardAdmin';
 export * from './DashboardUser';
 export * from './UserCard';
+export * from './Confirm';
+export * from './EditUserModal';
+export * from './Notification';
+export * from './RegisterModal';
+export * from './UpdatePasswordModal';

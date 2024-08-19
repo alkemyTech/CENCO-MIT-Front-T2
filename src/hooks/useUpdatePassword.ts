@@ -10,7 +10,8 @@ export function useUpdatePassword() {
   const [newPassword, setNewPassword] = useState<string>('');
   const [repeatPassword, setRepeatPassword] = useState<string>('');
   const [modalUpdatePasswordOpen, setModalUpdatePasswordOpen] = useState(false);
-  const [updatePasswordErrorMessage, setUpdatePasswordErrorMessage] = useState<string>();
+  const [updatePasswordErrorMessage, setUpdatePasswordErrorMessage] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState<string>('')
 
   const openUpdatePasswordModal = () => {
     setModalUpdatePasswordOpen(true);
@@ -26,17 +27,17 @@ export function useUpdatePassword() {
     } else if (field === 'new-password') {
       setNewPassword((event.currentTarget as HTMLInputElement).value);
     } else if (field === 'repeat-password') {
-      setNewPassword((event.currentTarget as HTMLInputElement).value);
+      setRepeatPassword((event.currentTarget as HTMLInputElement).value);
     }
   };
 
   const handleUpdatePasswordClick = async () => {
     let response: Response;
     try {
-      if (!isPasswordValid(newPassword)) {
+      if (!isPasswordValid(newPassword!)) {
         throw new Error('Password does not meet the requirements');
       }
-      if (!arePasswordsEqual(newPassword, repeatPassword)) {
+      if (!arePasswordsEqual(newPassword!, repeatPassword!)) {
         throw new Error('New passwords must coincide');
       }
       const body = JSON.stringify({ password, newPassword });
@@ -44,7 +45,7 @@ export function useUpdatePassword() {
       const res = await response.json();
 
       if (response.ok) {
-        console.log('Password updated successfully');
+        setSuccessMessage('Password updated')
       } else {
         throw new Error(res.message);
       }
@@ -63,6 +64,7 @@ export function useUpdatePassword() {
     modalUpdatePasswordOpen,
     setModalUpdatePasswordOpen,
     updatePasswordErrorMessage,
+    successMessage,
     setUpdatePasswordErrorMessage,
     openUpdatePasswordModal,
     closeUpdatePasswordModal,

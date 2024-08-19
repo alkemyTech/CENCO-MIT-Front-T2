@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { isEmailValid } from '../validations';
 import { authServices } from '../services';
 import { useLogout } from './useLogout';
+import { decodeToken } from '../validations/decodeToken';
 
 export function useLogin() {
   const navigate = useNavigate();
@@ -50,14 +51,11 @@ export function useLogin() {
       };
 
       if (response.ok) {
-        token = JSON.parse(
-          decodeURIComponent(escape(atob(res.token.split('.')[1])))
-        );
+        token = decodeToken(res.token);
         sessionStorage.setItem('accessToken', res.token);
         sessionStorage.setItem('userId', token.id);
         sessionStorage.setItem('userName', token.name);
         sessionStorage.setItem('userSurname', token.surname);
-        sessionStorage.setItem('userRole', token.role);
         handleLogin();
         navigate('/dashboard');
       } else {

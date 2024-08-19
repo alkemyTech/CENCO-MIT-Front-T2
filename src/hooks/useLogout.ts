@@ -9,7 +9,6 @@ export function useLogout() {
     sessionStorage.removeItem('userId');
     sessionStorage.removeItem('userName');
     sessionStorage.removeItem('userSurname');
-    sessionStorage.removeItem('userRole');
   };
 
   const handleLogin = () => {

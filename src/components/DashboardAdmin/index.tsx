@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react';
-import { Button, Input, Loader, UserList } from '..';
-import RegisterModal from '../Modal/RegisterModal';
-import EditUserModal from '../../components/Modal/EditUserModal';
-import { useDashboard } from '../../hooks';
 import styles from './style.module.css';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button, Input, Loader, UserList, RegisterModal, EditUserModal, UpdatePasswordModal } from '..';
 import { isTokenExpired } from '../../validations';
-import { useLogout } from '../../hooks/useLogout';
+import { useLogout, useUpdatePassword, useDashboard } from '../../hooks';
 import { User } from '../../interfaces/User';
 
 export function DashboardAdmin() {
   const navigate = useNavigate();
-  const { searchTerm, users, handleSearchClick, getAllUsers } = useDashboard();
   const { handleLogout } = useLogout();
+  const { searchTerm, users, handleSearchClick, getAllUsers } = useDashboard();
+  const { modalUpdatePasswordOpen, openUpdatePasswordModal, closeUpdatePasswordModal } =
+    useUpdatePassword();
 
   const [loading, setLoading] = useState(true);
   const [word, setWord] = useState<string>('');
@@ -24,7 +23,7 @@ export function DashboardAdmin() {
     const token = sessionStorage.getItem('accessToken');
     if (!token || isTokenExpired(token)) {
       handleLogout();
-      navigate('/')
+      navigate('/');
     }
 
     getAllUsers(searchTerm);
@@ -66,27 +65,41 @@ export function DashboardAdmin() {
         <Input
           label={'Enter name, surname, email or country'}
           type={'text'}
-          placeholder=" "
+          placeholder=' '
           value={word}
-          handleOnChange={(e) => setWord(e.target.value)}
+          handleOnChange={e => setWord(e.target.value)}
           className={styles.input}
         />
         <Button
           label={'Search'}
           onClick={() => handleSearchClick(word)}
-          type="button"
+          type='button'
         />
       </form>
       <div className={styles.listHeader}>
         <h2 className={styles.h2}>User List</h2>
-        <Button label={'Add User'} onClick={openRegisterModal} type="button" />
+        <div className={styles.listButtons}>
+          <Button
+            label={'Add User'}
+            onClick={openRegisterModal}
+            type='button'
+          />
+          <Button
+            label={'Update password'}
+            onClick={openUpdatePasswordModal}
+            type='button'
+          />
+        </div>
       </div>
       {loading ? (
         <div className={styles.loader}>
           <Loader />
         </div>
       ) : (
-        <UserList users={users} onEditClick={openEditModal} /> // Pasa la función de apertura del modal de edición
+        <UserList
+          users={users}
+          onEditClick={openEditModal}
+        /> // Pasa la función de apertura del modal de edición
       )}
 
       {isRegisterModalOpen && (
@@ -106,6 +119,7 @@ export function DashboardAdmin() {
           onUserUpdated={handleUserUpdated}
         />
       )}
+      {modalUpdatePasswordOpen && <UpdatePasswordModal onClose={closeUpdatePasswordModal}/>}
     </div>
   );
 }

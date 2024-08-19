@@ -11,6 +11,10 @@
     margin-right: 100px;
 }
 
+.listButtons {
+    display: flex;
+    gap: 1em;
+}
 .form {
     padding: 0 var(--mg-200);
     display: flex;

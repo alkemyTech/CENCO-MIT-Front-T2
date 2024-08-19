@@ -23,7 +23,7 @@ type FormValues = {
 
 type RegisterModalProps = {
   onClose: () => void;
-  onUserRegistered: () => void; // Nuevo callback
+  onUserRegistered: () => void;
 };
 
 export const RegisterModal: FC<RegisterModalProps> = ({
@@ -102,7 +102,10 @@ export const RegisterModal: FC<RegisterModalProps> = ({
 
         if (errorData.additionalInfo && errorData.additionalInfo.message) {
           const backendErrors = errorData.additionalInfo.message;
-          if (backendErrors.includes('rut already exist.') || backendErrors.includes('email already exist.')) {
+          if (
+            backendErrors.includes('rut already exist.') ||
+            backendErrors.includes('email already exist.')
+          ) {
             errorMessage = validationMessages.userExists;
           }
         }
@@ -112,7 +115,7 @@ export const RegisterModal: FC<RegisterModalProps> = ({
       setNotificationMessage('User registered successfully');
       setIsSuccessful(true);
       setShowNotification(true);
-      onUserRegistered(); // Llama al callback para actualizar la lista de usuarios
+      onUserRegistered();
     } catch (error: unknown) {
       if (error instanceof Error) {
         setNotificationMessage(`Error: ${error.message}`);
@@ -130,7 +133,7 @@ export const RegisterModal: FC<RegisterModalProps> = ({
     setShowNotification(false);
     setNotificationMessage('');
     if (isSuccessful) {
-      onClose(); // Solo cierra el modal si el registro fue exitoso
+      onClose();
     }
   };
 
@@ -144,7 +147,10 @@ export const RegisterModal: FC<RegisterModalProps> = ({
       )}
       <Modal onClose={onClose}>
         <h2 className={styles.h2}>Register New User</h2>
-        <form onSubmit={handleSubmit} className={styles.grid}>
+        <form
+          onSubmit={handleSubmit}
+          className={styles.grid}
+        >
           <input
             type='text'
             name='name'
@@ -152,7 +158,7 @@ export const RegisterModal: FC<RegisterModalProps> = ({
             value={formValues.name}
             onChange={handleChange}
           />
-          
+
           <input
             type='text'
             name='surname'
@@ -160,7 +166,7 @@ export const RegisterModal: FC<RegisterModalProps> = ({
             value={formValues.surname}
             onChange={handleChange}
           />
-          
+
           <input
             type='email'
             name='email'
@@ -169,7 +175,7 @@ export const RegisterModal: FC<RegisterModalProps> = ({
             onChange={handleChange}
             autoComplete={'new-password'}
           />
-        
+
           <input
             type='password'
             name='password'
@@ -202,13 +208,16 @@ export const RegisterModal: FC<RegisterModalProps> = ({
             value={formValues.phone}
             onChange={handleChange}
           />
-          <p className={styles.errorLabel}>{(errors.name ||
-            errors.surname ||
-            errors.email ||
-            errors.password ||
-            errors.country ||
-            errors.rut ||
-            errors.phone) && `All fields must be valid`}</p>
+          <p className={styles.errorLabel}>
+            {(errors.name ||
+              errors.surname ||
+              errors.email ||
+              errors.password ||
+              errors.country ||
+              errors.rut ||
+              errors.phone) &&
+              `All fields must be valid`}
+          </p>
 
           <Button
             label={'Register'}

@@ -1,7 +1,8 @@
 import styles from "./style.module.css";
 import { useState, useEffect } from "react";
-import { Modal, Button, CardInfoUser, CardContact, ProfilePicture } from "../index";
+import { Modal, Button, CardInfoUser, CardContact, ProfilePicture, /* EditUserModal */ } from "../index";
 import { isNameValid, isPhoneValid } from '../../validations';
+
 export function DashboardUser() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | null>(null);
@@ -16,7 +17,6 @@ export function DashboardUser() {
     if (token) {
       const fetchUserData = async () => {
         try {
-          
           const response = await fetch(`/api/users/${userId}/info`, {
             method: 'GET',
             headers: {
@@ -31,13 +31,11 @@ export function DashboardUser() {
 
           const data = await response.json();
 
-         
           setUserId(data.id);
           setName(data.name);
           setSurname(data.surname);
           setPhone(data.phone);
           setPais(data.pais);
-
         } catch (error) {
           console.error("Error al obtener la información del usuario:", error);
         }
@@ -65,7 +63,6 @@ export function DashboardUser() {
       return;
     }
 
-    
     if (!isNameValid(name)) {
       alert("El nombre solo puede contener letras, espacios y apóstrofes.");
       return;
@@ -84,7 +81,6 @@ export function DashboardUser() {
     const updatedUser = { name, surname, phone, pais };
 
     try {
-      
       const response = await fetch(`/api/users/${userId}`, {
         method: 'PATCH',
         headers: {
@@ -102,7 +98,6 @@ export function DashboardUser() {
 
       console.log("Perfil actualizado con éxito:", result);
       handleCloseModal();
-
     } catch (error) {
       console.error("Error al actualizar el perfil:", error);
       alert("Hubo un problema al actualizar tu perfil. Intenta de nuevo.");

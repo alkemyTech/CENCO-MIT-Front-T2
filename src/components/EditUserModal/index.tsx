@@ -1,5 +1,5 @@
 import styles from './style.module.css'
-import React, { useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Modal, Confirm, Button } from '../index';
 import { isEmailValid, isPhoneValid } from '../../validations';
 import { userServices } from '../../services';
@@ -22,7 +22,7 @@ type EditUserModalProps = {
   onUserUpdated: () => void;
 };
 
-export const EditUserModal: React.FC<EditUserModalProps> = ({
+export const EditUserModal: FC<EditUserModalProps> = ({
   user,
   onClose,
   onUserUpdated,

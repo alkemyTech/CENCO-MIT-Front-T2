@@ -1,10 +1,10 @@
 import styles from './style.module.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Input, Loader, UserList, RegisterModal, EditUserModal, UpdatePasswordModal } from '..';
-import { isTokenExpired } from '../../validations';
-import { useLogout, useUpdatePassword, useDashboard } from '../../hooks';
-import { User } from '../../interfaces/User';
+import { Button, Input, Loader, UserList, RegisterModal, EditUserModal, UpdatePasswordModal } from '../..';
+import { isTokenExpired } from '../../../validations';
+import { useLogout, useUpdatePassword, useDashboard } from '../../../hooks';
+import { User } from '../../../interfaces/User';
 
 export function DashboardAdmin() {
   const navigate = useNavigate();

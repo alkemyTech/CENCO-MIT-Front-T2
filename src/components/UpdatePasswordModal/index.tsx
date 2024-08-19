@@ -1,8 +1,8 @@
 import styles from './style.module.css';
-import { Modal } from '../Modal';
-import { PasswordInput } from '../PasswordInput';
+import { Modal } from '../globals/Modal';
+import { PasswordInput } from '../globals/PasswordInput';
 import { useUpdatePassword } from '../../hooks/useUpdatePassword';
-import { Button } from '../Button';
+import { Button } from '../globals/Button';
 
 type UpdatePsswordModalProps = {
   onClose: () => void;

@@ -14,7 +14,7 @@ interface EditProfileModalProps {
   handleSubmit: (event: React.FormEvent) => Promise<void>;
 }
 
-const EditProfileModal: React.FC<EditProfileModalProps> = ({
+export const EditProfileModal: React.FC<EditProfileModalProps> = ({
   isOpen,
   onClose,
   name,
@@ -79,5 +79,3 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
     </div>
   );
 };
-
-export default EditProfileModal;

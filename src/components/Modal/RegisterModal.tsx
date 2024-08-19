@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal } from './index';
+
 import {
   isEmailValid,
   isPasswordValid,
@@ -10,6 +10,7 @@ import {
 import { userServices } from '../../services';
 import { Notification } from './Notification';
 import { validationMessages } from '../../constants/messages';
+import Modal from '.';
 
 type FormValues = {
   name: string;
@@ -24,7 +25,7 @@ type FormValues = {
 
 type RegisterModalProps = {
   onClose: () => void;
-  onUserRegistered: () => void; // Nuevo callback
+  onUserRegistered: () => void; 
 };
 
 const RegisterModal: React.FC<RegisterModalProps> = ({
@@ -116,7 +117,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({
       setNotificationMessage('User registered successfully');
       setIsSuccessful(true);
       setShowNotification(true);
-      onUserRegistered(); // Llama al callback para actualizar la lista de usuarios
+      onUserRegistered(); 
     } catch (error: unknown) {
       if (error instanceof Error) {
         setNotificationMessage(`Error: ${error.message}`);
@@ -134,7 +135,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({
     setShowNotification(false);
     setNotificationMessage('');
     if (isSuccessful) {
-      onClose(); // Solo cierra el modal si el registro fue exitoso
+      onClose(); 
     }
   };
 

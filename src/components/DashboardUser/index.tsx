@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Button from "../Button";
+import { Button } from "../Button/index"
 import { CardInfoUser } from "../CarIdInfo";
 import { CardContact } from "../ContactUser/Index";
 import ProfilePicture from "../ProfilePicture/Index";
-import Modal from "../Modal";
 import styles from "./style.module.css";
-import { isNameValid } from "../../Validations/isNameValid";
-import { isPhoneValid } from "../../Validations/isPhoneValid";
+import { isNameValid, isPhoneValid } from '../../validations';
+import EditProfileModal from "../Modal/EditProfileModal";
 
 export function DashboardUser() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -16,14 +15,12 @@ export function DashboardUser() {
   const [phone, setPhone] = useState<string>("");
   const [pais, setPais] = useState<string>("");
 
-  
   const token = sessionStorage.getItem("token");
 
   useEffect(() => {
     if (token) {
       const fetchUserData = async () => {
         try {
-          
           const response = await fetch(`/api/users/${userId}/info`, {
             method: 'GET',
             headers: {
@@ -38,13 +35,11 @@ export function DashboardUser() {
 
           const data = await response.json();
 
-         
           setUserId(data.id);
           setName(data.name);
           setSurname(data.surname);
           setPhone(data.phone);
           setPais(data.pais);
-
         } catch (error) {
           console.error("Error al obtener la información del usuario:", error);
         }
@@ -72,7 +67,6 @@ export function DashboardUser() {
       return;
     }
 
-    
     if (!isNameValid(name)) {
       alert("El nombre solo puede contener letras, espacios y apóstrofes.");
       return;
@@ -91,7 +85,6 @@ export function DashboardUser() {
     const updatedUser = { name, surname, phone, pais };
 
     try {
-      
       const response = await fetch(`/api/users/${userId}`, {
         method: 'PATCH',
         headers: {
@@ -109,7 +102,6 @@ export function DashboardUser() {
 
       console.log("Perfil actualizado con éxito:", result);
       handleCloseModal();
-
     } catch (error) {
       console.error("Error al actualizar el perfil:", error);
       alert("Hubo un problema al actualizar tu perfil. Intenta de nuevo.");
@@ -134,50 +126,19 @@ export function DashboardUser() {
         </p>
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <div className={styles.modalContent}>
-          <h2>Editar Perfil</h2>
-          <form onSubmit={handleSubmit}>
-            <div>Nuevo Nombre:</div>
-            <input
-              type="text"
-              name="name"
-              placeholder="Nuevo Nombre"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-
-            <div>Nuevo Apellido:</div>
-            <input
-              type="text"
-              name="surname"
-              placeholder="Nuevo Apellido"
-              value={surname}
-              onChange={(e) => setSurname(e.target.value)}
-            />
-
-            <div>Nuevo Teléfono:</div>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Nuevo Teléfono"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-
-            <div>Nuevo País:</div>
-            <input
-              type="text"
-              name="pais"
-              placeholder="Nuevo País"
-              value={pais}
-              onChange={(e) => setPais(e.target.value)}
-            />
-            <br />
-            <Button label={"Guardar Cambios"} type="submit" />
-          </form>
-        </div>
-      </Modal>
+      <EditProfileModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        name={name}
+        surname={surname}
+        phone={phone}
+        pais={pais}
+        setName={setName}
+        setSurname={setSurname}
+        setPhone={setPhone}
+        setPais={setPais}
+        handleSubmit={handleSubmit}
+      />
     </main>
   );
 }

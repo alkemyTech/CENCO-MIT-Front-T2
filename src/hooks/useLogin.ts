@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isEmailValid } from '../validations';
 import { authServices } from '../services';
+import { useLogout } from './useLogout';
 
 export function useLogin() {
   const navigate = useNavigate();
+  const { handleLogin } = useLogout();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -56,7 +58,8 @@ export function useLogin() {
         sessionStorage.setItem('userName', token.name);
         sessionStorage.setItem('userSurname', token.surname);
         sessionStorage.setItem('userRole', token.role);
-        navigate('/home');
+        handleLogin();
+        navigate('/dashboard');
       } else {
         throw new Error(res.message);
       }

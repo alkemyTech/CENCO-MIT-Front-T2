@@ -5,15 +5,16 @@ type InputProps = {
   type: string; // can be text, email, password, number, etc.
   value:string;
   placeholder?: string; // optional
+  className?: string;
   handleOnChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // optional
 };
 
-export function Input({ label, type, value, placeholder, handleOnChange }: InputProps) {
+export function Input({ label, type, value, placeholder, className, handleOnChange }: InputProps) {
   return (
     <div className={styles.wrapper}>
       <input
         type={type}
-        className={styles.content + styles.input}
+        className={className}
         id={`${label}-input`}
         name={`${label}-input`}
         value={value}
@@ -21,6 +22,7 @@ export function Input({ label, type, value, placeholder, handleOnChange }: Input
         placeholder={placeholder}
         aria-label={`${label} input`}
         autoComplete="new-password"
+        
       />
       <label className={styles.label} htmlFor={`${label}-input`}>{label}</label>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './style.module.css';
+import { Button } from '../Button';
 
 type NotificationProps = {
   message: string;
@@ -13,7 +14,7 @@ export const Notification: React.FC<NotificationProps> = ({
   return (
     <div className={styles.notification}>
       <p>{message}</p>
-      <button onClick={onClose}>OK</button>
+      <Button onClick={onClose} label={'OK'} />
     </div>
   );
 };

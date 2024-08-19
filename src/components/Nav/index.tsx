@@ -1,36 +1,37 @@
 import { Link } from 'react-router-dom';
 import { NavItem } from '../NavItem';
 import styles from './style.module.css';
-import { faRightFromBracket, faUser, faGaugeHigh} from '@fortawesome/free-solid-svg-icons';
+import {
+  faRightFromBracket,
+  faGaugeHigh,
+} from '@fortawesome/free-solid-svg-icons';
+import { useLogout } from '../../hooks/useLogout';
 
 export function Nav() {
-  const isAdmin = sessionStorage.getItem('userRole')?.toString() === 'admin';
 
+  const { handleLogout } = useLogout();
+  
   return (
     <nav className={styles.nav}>
-      <Link to={'/home'} className={styles.title}>
-      <h1>
-        <span>Talent</span>Manager
-      </h1>
+      <Link
+        to={'/dashboard'}
+        className={styles.title}
+      >
+        <h1>
+          <span>Talent</span>Manager
+        </h1>
       </Link>
-
       <ul className={styles.list}>
-        {isAdmin && (
-          <NavItem
-            label={'Dashboard'}
-            route={'/dashboard'}
-            icon={faGaugeHigh}
-          />
-        )}
         <NavItem
-          label={'Profile'}
-          route={'/profile'}
-          icon={faUser}
+          label={'Dashboard'}
+          route={'/dashboard'}
+          icon={faGaugeHigh}
         />
         <NavItem
           label={'Logout'}
           route={'/'}
           icon={faRightFromBracket}
+          onClick={handleLogout}
         />
       </ul>
     </nav>

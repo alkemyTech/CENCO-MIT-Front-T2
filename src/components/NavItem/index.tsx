@@ -7,11 +7,12 @@ type NavItemProps = {
   label: string;
   route: string;
   icon?: IconDefinition;
+  onClick?: ()=> void;
 };
 
-export function NavItem({ label, route, icon }: NavItemProps) {
+export function NavItem({ label, route, icon, onClick }: NavItemProps) {
   return (
-    <Link to={route} className={styles.link}>
+    <Link to={route} className={styles.link} onClick={onClick}>
       {icon && <FontAwesomeIcon icon={icon} className={styles.icon}/>}
       <li className={styles.listItem}>{label}</li>
     </Link>

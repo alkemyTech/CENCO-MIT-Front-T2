@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
-import { Button, Input, Loader, UserList } from '../../components';
-import RegisterModal from '../../components/Modal/RegisterModal';
+import { Button, Input, Loader, UserList } from '..';
+import RegisterModal from '../Modal/RegisterModal';
 import EditUserModal from '../../components/Modal/EditUserModal';
-import { useDashborad } from '../../hooks';
+import { useDashboard } from '../../hooks';
 import styles from './style.module.css';
+import { useNavigate } from 'react-router-dom';
+import { isTokenExpired } from '../../validations';
+import { useLogout } from '../../hooks/useLogout';
 import { User } from '../../interfaces/User';
 
 export function DashboardAdmin() {
-  const { searchTerm, users, handleSearchClick, getAllUsers } = useDashborad();
+  const navigate = useNavigate();
+  const { searchTerm, users, handleSearchClick, getAllUsers } = useDashboard();
+  const { handleLogout } = useLogout();
 
   const [loading, setLoading] = useState(true);
   const [word, setWord] = useState<string>('');
@@ -16,9 +21,15 @@ export function DashboardAdmin() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null); // Usuario seleccionado para editar
 
   useEffect(() => {
+    const token = sessionStorage.getItem('accessToken');
+    if (!token || isTokenExpired(token)) {
+      handleLogout();
+      navigate('/')
+    }
+
     getAllUsers(searchTerm);
     setLoading(false);
-  }, [searchTerm]);
+  }, [navigate, searchTerm]);
 
   const openRegisterModal = () => {
     setIsRegisterModalOpen(true);
@@ -50,7 +61,7 @@ export function DashboardAdmin() {
 
   return (
     <div className={styles.content}>
-      <h1>Dashboard Admin</h1>
+      <h1 className={styles.h1}>Your Dashboard</h1>
       <form className={styles.form}>
         <Input
           label={'Enter name, surname, email or country'}
@@ -58,6 +69,7 @@ export function DashboardAdmin() {
           placeholder=" "
           value={word}
           handleOnChange={(e) => setWord(e.target.value)}
+          className={styles.input}
         />
         <Button
           label={'Search'}
@@ -66,7 +78,7 @@ export function DashboardAdmin() {
         />
       </form>
       <div className={styles.listHeader}>
-        <h2>User List</h2>
+        <h2 className={styles.h2}>User List</h2>
         <Button label={'Add User'} onClick={openRegisterModal} type="button" />
       </div>
       {loading ? (

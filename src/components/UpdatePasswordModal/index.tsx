@@ -1,11 +1,11 @@
 import styles from './style.module.css';
-import { useUpdatePassword } from '../../hooks/useUpdatePassword';
+import { useUpdatePassword } from '../../hooks';
 import { Button, Modal, PasswordInput } from '../index';
 
 type UpdatePsswordModalProps = {
   onClose: () => void;
-}
-export function UpdatePasswordModal( {onClose}: UpdatePsswordModalProps) {
+};
+export function UpdatePasswordModal({ onClose }: UpdatePsswordModalProps) {
   const {
     password,
     newPassword,

@@ -1,20 +1,20 @@
 import styles from './style.module.css';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Button,
   CardInfoUser,
   CardContact,
   ProfilePicture,
   EditProfileModal,
-} from '../../index';
+} from '../..';
 import { userServices } from '../../../services';
-import { useNavigate } from 'react-router-dom';
+import { useLogout } from '../../../hooks';
 import {
   isTokenExpired,
   isNameValid,
   isPhoneValid,
 } from '../../../validations';
-import { useLogout } from '../../../hooks';
 
 export function DashboardUser() {
   const navigate = useNavigate();
@@ -90,9 +90,9 @@ export function DashboardUser() {
     }
 
     const updatedUser = { name, surname, phone, country };
-    const body = JSON.stringify(updatedUser)
+    const body = JSON.stringify(updatedUser);
     try {
-      const response = await userServices.update(token, userId, body)
+      const response = await userServices.update(token, userId, body);
       if (!response.ok) {
         throw new Error('Error al actualizar el perfil');
       }
@@ -120,7 +120,10 @@ export function DashboardUser() {
           rut={rut}
           country={country}
         />
-        <CardContact phone={phone} email={email} />
+        <CardContact
+          phone={phone}
+          email={email}
+        />
       </div>
       <div>
         <p>Aquí puedes editar tu información personal</p>

@@ -1,5 +1,9 @@
-import styles from './style.module.css'
-import { useNavigate, useRouteError, isRouteErrorResponse } from 'react-router-dom';
+import styles from './style.module.css';
+import {
+  useNavigate,
+  useRouteError,
+  isRouteErrorResponse,
+} from 'react-router-dom';
 import { Button } from '../../components';
 
 export function ErrorPage() {
@@ -22,15 +26,15 @@ export function ErrorPage() {
     navigate(-1);
     console.error(error);
   };
-  
+
   return (
     <main className={styles.errorPage}>
       <h1>Oops.. there's been an unexpected error.</h1>
       <p className={styles.errorText}>{errorMessage}</p>
-        <Button
-          label='Go back home'
-          onClick={handleClick}
-        />
+      <Button
+        label='Go back home'
+        onClick={handleClick}
+      />
     </main>
-  )
+  );
 }

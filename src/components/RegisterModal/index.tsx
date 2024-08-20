@@ -8,7 +8,7 @@ import {
 } from '../../validations';
 import { userServices } from '../../services';
 import { validationMessages } from '../../constants/messages';
-import { Modal, Button, Notification } from '../index';
+import { Modal, Button, Notification } from '..';
 
 type FormValues = {
   name: string;

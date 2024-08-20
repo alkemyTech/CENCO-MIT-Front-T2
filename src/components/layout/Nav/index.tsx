@@ -1,6 +1,6 @@
+import styles from './style.module.css';
 import { Link } from 'react-router-dom';
 import { NavItem } from '../../index';
-import styles from './style.module.css';
 import {
   faRightFromBracket,
   faGaugeHigh,
@@ -8,9 +8,8 @@ import {
 import { useLogout } from '../../../hooks';
 
 export function Nav() {
-
   const { handleLogout } = useLogout();
-  
+
   return (
     <nav className={styles.nav}>
       <Link

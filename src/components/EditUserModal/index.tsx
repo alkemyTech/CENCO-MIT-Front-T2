@@ -1,6 +1,6 @@
 import styles from './style.module.css'
 import { FC, useState, useEffect } from 'react';
-import { Modal, Confirm, Button } from '../index';
+import { Modal, Confirm, Button } from '..';
 import { isEmailValid, isPhoneValid } from '../../validations';
 import { userServices } from '../../services';
 import { validationMessages } from '../../constants/messages';

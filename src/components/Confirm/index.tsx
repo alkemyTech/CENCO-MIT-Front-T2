@@ -1,13 +1,13 @@
-import React from 'react';
+import { FC, ReactNode } from 'react';
 import styles from './style.module.css';
 
 type NotificationProps = {
   message: string;
   onClose: () => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
 };
 
-export const Confirm: React.FC<NotificationProps> = ({
+export const Confirm: FC<NotificationProps> = ({
   message,
   onClose,
   children,

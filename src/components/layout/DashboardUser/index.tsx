@@ -46,11 +46,10 @@ export function DashboardUser() {
 
     try {
       getUserInfo(token!);
-      setLoading(false);
     } catch (error) {
       console.error((error as Error).message);
     }
-    
+    setLoading(false);
   },[navigate]);
 
   const handleOpenModal = () => {

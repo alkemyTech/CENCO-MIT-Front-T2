@@ -1,7 +1,15 @@
 import styles from './style.module.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Input, Loader, UserList, RegisterModal, EditUserModal, UpdatePasswordModal } from '../..';
+import {
+  Button,
+  Input,
+  Loader,
+  UserList,
+  RegisterModal,
+  EditUserModal,
+  UpdatePasswordModal,
+} from '../..';
 import { isTokenExpired } from '../../../validations';
 import { useLogout, useUpdatePassword, useDashboard } from '../../../hooks';
 import { User } from '../../../interfaces/User';
@@ -10,8 +18,11 @@ export function DashboardAdmin() {
   const navigate = useNavigate();
   const { handleLogout } = useLogout();
   const { searchTerm, users, handleSearchClick, getAllUsers } = useDashboard();
-  const { modalUpdatePasswordOpen, openUpdatePasswordModal, closeUpdatePasswordModal } =
-    useUpdatePassword();
+  const {
+    modalUpdatePasswordOpen,
+    openUpdatePasswordModal,
+    closeUpdatePasswordModal,
+  } = useUpdatePassword();
 
   const [loading, setLoading] = useState(true);
   const [word, setWord] = useState<string>('');
@@ -120,7 +131,9 @@ export function DashboardAdmin() {
           isAdmin={true}
         />
       )}
-      {modalUpdatePasswordOpen && <UpdatePasswordModal onClose={closeUpdatePasswordModal}/>}
+      {modalUpdatePasswordOpen && (
+        <UpdatePasswordModal onClose={closeUpdatePasswordModal} />
+      )}
     </div>
   );
 }

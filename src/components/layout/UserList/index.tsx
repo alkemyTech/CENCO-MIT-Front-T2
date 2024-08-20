@@ -15,7 +15,7 @@ export function UserList({ users, onEditClick }: UserListProps) {
   return (
     <div className={styles.list}>
       {sortedUsers.map((user, index) => {
-        return <UserCard user={user} key={index} onEditClick={onEditClick} admin={user.role === 'admin'}/>;
+        return <UserCard user={user} key={index} onEditClick={onEditClick} admin={true}/>;
       })}
     </div>
   );

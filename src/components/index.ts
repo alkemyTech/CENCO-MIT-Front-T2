@@ -16,8 +16,3 @@ export * from './EditUserModal';
 export * from './Notification';
 export * from './RegisterModal';
 export * from './UpdatePasswordModal';
-export * from './CarIdInfoUser';
-export * from './ProfilePicture';
-export * from './CardContact';
-export * from './EditProfileModal';
-export * from './DeleteUserModal';

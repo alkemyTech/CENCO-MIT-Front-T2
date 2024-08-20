@@ -10,4 +10,6 @@
   overflow-x: hidden;
   height: calc(100dvh - 60px);
   background-color: var(--clr-primary-100);
+  scrollbar-gutter: stable;
+  justify-content: flex-start;
 }

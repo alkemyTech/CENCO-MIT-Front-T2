@@ -10,7 +10,7 @@ export function useDashboard() {
   };
   const [users, setUsers] = useState<User[]>([]);
 
-  const getAllUsers = async (searchTerm: string) => {
+  const getAllUsers = async (searchTerm?: string) => {
     try {
       const token = sessionStorage.getItem('accessToken');
       const response = await userServices.getAll(token!, searchTerm);

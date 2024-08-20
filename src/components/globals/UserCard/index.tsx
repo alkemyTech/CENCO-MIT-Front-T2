@@ -10,9 +10,10 @@ type Props = {
   onEditClick: (user: User) => void; // Callback para manejar el clic en el botón de edición
   admin?: boolean;
   onUpdatePasswordClick?: () => void;
+  onDeleteClick?: () => void;
 };
 
-export function UserCard({ user, onEditClick, admin, onUpdatePasswordClick }: Props) {
+export function UserCard({ user, onEditClick, admin, onUpdatePasswordClick, onDeleteClick }: Props) {
     const status = !user.deletedDate ? styles.cardActive : styles.cardInactive;
   const avatar = user.role === 'admin' ? avatarAdmin : avatarUser;
 
@@ -43,7 +44,7 @@ export function UserCard({ user, onEditClick, admin, onUpdatePasswordClick }: Pr
               {admin ? (
                 <Button
                   label='Delete'
-                  onClick={() => alert('Eliminar usuario!')}
+                  onClick={onDeleteClick}
                   type='submit'
                   icon={faTrash}
                   style={{ background: 'red' }}

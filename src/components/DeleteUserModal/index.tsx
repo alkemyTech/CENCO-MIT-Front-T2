@@ -20,7 +20,7 @@ export function DeleteUserModal({ errorMessage, successMessage, onSubmit, onClos
           ) : (
             <p className={styles.successMessage}>{successMessage}</p>
           )}
-          <div className={styles.buttons}>
+          {(errorMessage || successMessage ? <Button label={'Ok'} onClick={onClose} /> : <div className={styles.buttons}>
             <Button
               label={'Confirm'}
               onClick={onSubmit}
@@ -29,7 +29,7 @@ export function DeleteUserModal({ errorMessage, successMessage, onSubmit, onClos
               label={'Cancel'}
               onClick={onClose}
             />
-          </div>
+          </div>)}
         </div>
       }
     />

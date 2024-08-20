@@ -4,7 +4,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: var(--br-100);
-  background-color: var(--clr-primary-200);
+  background: var(--clr-primary-200);
+  background: radial-gradient(ellipse, var(--clr-primary-100) 50%, var(--clr-primary-200) 70%);
   z-index: 1000;
 }
 

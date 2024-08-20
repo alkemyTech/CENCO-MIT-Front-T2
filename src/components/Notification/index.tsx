@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './style.module.css';
-import { Button } from '../Button';
+import { Button } from '../globals/Button';
 
 type NotificationProps = {
   message: string;

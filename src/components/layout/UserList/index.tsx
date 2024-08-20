@@ -1,6 +1,6 @@
 import styles from './style.module.css';
-import { User } from '../../interfaces/User';
-import { UserCard } from '../UserCard';
+import { User } from '../../../interfaces/User';
+import { UserCard } from '../../index';
 
 type UserListProps = {
   users: User[];

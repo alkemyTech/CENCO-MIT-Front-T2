@@ -1,8 +1,9 @@
 import { DashboardAdmin, DashboardUser, Header } from '../../components';
+import { decodeToken } from '../../validations/';
 import styles from './style.module.css'
 
 export function Dashboard() {
-  const userRole = sessionStorage.getItem('userRole')?.toLocaleString();
+  const userRole = decodeToken(sessionStorage.getItem('accessToken')!).role;
   return (
   <>
     <Header />

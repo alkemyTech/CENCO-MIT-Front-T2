@@ -1,0 +1,15 @@
+.errorLabel {
+  color: red;
+  font-size: var(--fs-100);
+  position: unset;
+  height: 24px;
+}
+
+.h2 {
+  font-size: var(--fs-400);
+}
+
+.grid {
+  display: grid;
+  gap: .6em;
+}

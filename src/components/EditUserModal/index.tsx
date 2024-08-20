@@ -1,57 +1,45 @@
-import styles from './style.module.css';
-import { FC, useState } from 'react';
-import { Modal } from './index';
-import {
-  isEmailValid,
-  isPasswordValid,
-  isPhoneValid,
-  isRutValid,
-} from '../../validations';
-
+import styles from './style.module.css'
+import React, { useState, useEffect } from 'react';
+import { Modal, Confirm, Button } from '../index';
+import { isEmailValid, isPhoneValid } from '../../validations';
 import { userServices } from '../../services';
-import { Notification } from './Notification';
 import { validationMessages } from '../../constants/messages';
-import { Button } from '..';
 
 type FormValues = {
+  id: string;
   name: string;
   surname: string;
   email: string;
-  password: string;
   country: string;
   role: string;
   rut: string;
   phone: string;
 };
 
-type RegisterModalProps = {
+type EditUserModalProps = {
+  user: FormValues;
   onClose: () => void;
-  onUserRegistered: () => void; // Nuevo callback
+  onUserUpdated: () => void;
 };
 
-const RegisterModal: FC<RegisterModalProps> = ({
+export const EditUserModal: React.FC<EditUserModalProps> = ({
+  user,
   onClose,
-  onUserRegistered,
+  onUserUpdated,
 }) => {
-  const [formValues, setFormValues] = useState<FormValues>({
-    name: '',
-    surname: '',
-    email: '',
-    password: '',
-    country: 'Chile',
-    role: 'user',
-    rut: '',
-    phone: '',
-  });
-
+  const [formValues, setFormValues] = useState<FormValues>(user);
   const [errors, setErrors] = useState<Partial<FormValues>>({});
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
   const [isSuccessful, setIsSuccessful] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  useEffect(() => {
+    setFormValues(user);
+  }, [user]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
-    setErrors({});
   };
 
   const validate = () => {
@@ -65,18 +53,8 @@ const RegisterModal: FC<RegisterModalProps> = ({
     } else if (!isEmailValid(formValues.email)) {
       errors.email = validationMessages.emailInvalid;
     }
-    if (!formValues.password) {
-      errors.password = validationMessages.passwordRequired;
-    } else if (!isPasswordValid(formValues.password)) {
-      errors.password = validationMessages.passwordInvalid;
-    }
     if (!formValues.country)
       errors.country = validationMessages.countryRequired;
-    if (!formValues.rut) {
-      errors.rut = validationMessages.rutRequired;
-    } else if (!isRutValid(formValues.rut)) {
-      errors.rut = validationMessages.rutInvalid;
-    }
     if (!formValues.phone) {
       errors.phone = validationMessages.phoneRequired;
     } else if (!isPhoneValid(formValues.phone)) {
@@ -91,11 +69,27 @@ const RegisterModal: FC<RegisterModalProps> = ({
     e.preventDefault();
     if (!validate()) return;
 
+    setShowConfirm(true);
+  };
+
+  const handleConfirmUpdate = async () => {
     try {
-      const formData = { ...formValues, phone: Number(formValues.phone) };
+      // Solo incluir los campos que han cambiado
+      const updatedFields: Partial<FormValues> = {};
+      Object.keys(formValues).forEach((key) => {
+        if (
+          formValues[key as keyof FormValues] !== user[key as keyof FormValues]
+        ) {
+          updatedFields[key as keyof FormValues] =
+            formValues[key as keyof FormValues];
+        }
+      });
+
+      const formData = { ...updatedFields, phone: Number(formValues.phone) };
       const accessToken = sessionStorage.getItem('accessToken') || '';
-      const response = await userServices.create(
+      const response = await userServices.update(
         accessToken,
+        formValues.id,
         JSON.stringify(formData)
       );
 
@@ -105,27 +99,30 @@ const RegisterModal: FC<RegisterModalProps> = ({
 
         if (errorData.additionalInfo && errorData.additionalInfo.message) {
           const backendErrors = errorData.additionalInfo.message;
-          if (backendErrors.includes('rut already exist.') || backendErrors.includes('email already exist.')) {
+          if (backendErrors.includes('email already exist.')) {
             errorMessage = validationMessages.userExists;
           }
         }
+
         throw new Error(errorMessage);
       }
 
-      setNotificationMessage('User registered successfully');
+      setNotificationMessage(validationMessages.updateSuccess);
       setIsSuccessful(true);
       setShowNotification(true);
-      onUserRegistered(); // Llama al callback para actualizar la lista de usuarios
+      onUserUpdated();
     } catch (error: unknown) {
       if (error instanceof Error) {
         setNotificationMessage(`Error: ${error.message}`);
         setIsSuccessful(false);
         setShowNotification(true);
       } else {
-        setNotificationMessage('Unknown error occurred during the request');
+        setNotificationMessage(validationMessages.updateError);
         setIsSuccessful(false);
         setShowNotification(true);
       }
+    } finally {
+      setShowConfirm(false);
     }
   };
 
@@ -133,88 +130,91 @@ const RegisterModal: FC<RegisterModalProps> = ({
     setShowNotification(false);
     setNotificationMessage('');
     if (isSuccessful) {
-      onClose(); // Solo cierra el modal si el registro fue exitoso
+      onClose();
     }
+  };
+
+  const handleConfirmClose = () => {
+    setShowConfirm(false);
   };
 
   return (
     <>
       {showNotification && (
-        <Notification
+        <Confirm
           message={notificationMessage}
           onClose={handleNotificationClose}
         />
       )}
+      {showConfirm && (
+        <Confirm
+          message={validationMessages.confirmUpdate}
+          onClose={handleConfirmClose}
+        >
+          <button onClick={handleConfirmUpdate}>Confirm</button>
+          <button onClick={handleConfirmClose}>Cancel</button>
+        </Confirm>
+      )}
       <Modal onClose={onClose}>
-        <h2 className={styles.h2}>Register New User</h2>
+        <h2 className={styles.h2}>Edit User</h2>
         <form onSubmit={handleSubmit} className={styles.grid}>
           <input
-            type='text'
-            name='name'
-            placeholder='Full Name'
+            type="text"
+            name="name"
+            placeholder="Full Name"
             value={formValues.name}
             onChange={handleChange}
           />
-          
+
           <input
-            type='text'
-            name='surname'
-            placeholder='Surname'
+            type="text"
+            name="surname"
+            placeholder="Surname"
             value={formValues.surname}
             onChange={handleChange}
           />
-          
+
           <input
-            type='email'
-            name='email'
-            placeholder='Email'
+            type="email"
+            name="email"
+            placeholder="Email"
             value={formValues.email}
             onChange={handleChange}
-            autoComplete={'new-password'}
-          />
-        
-          <input
-            type='password'
-            name='password'
-            placeholder='Password'
-            value={formValues.password}
-            onChange={handleChange}
-            autoComplete={'new-password'}
           />
 
           <input
-            type='text'
-            name='country'
-            placeholder='Country'
+            type="text"
+            name="country"
+            placeholder="Country"
             value={formValues.country}
             onChange={handleChange}
           />
 
           <input
-            type='text'
-            name='rut'
-            placeholder='RUT'
+            type="text"
+            name="rut"
+            placeholder="RUT"
             value={formValues.rut}
             onChange={handleChange}
+            disabled
           />
 
           <input
-            type='text'
-            name='phone'
-            placeholder='Phone Number'
+            type="text"
+            name="phone"
+            placeholder="Phone Number"
             value={formValues.phone}
             onChange={handleChange}
           />
-          <p className={styles.errorLabel}>{(errors.name ||
+           <div  className={styles.errorLabel}>{(errors.name ||
             errors.surname ||
             errors.email ||
-            errors.password ||
             errors.country ||
             errors.rut ||
-            errors.phone) && `All fields must be valid`}</p>
+            errors.phone) && `All fields must be valid`}</div>
 
           <Button
-            label={'Register'}
+            label={'Update'}
             type={'submit'}
           />
         </form>
@@ -222,5 +222,3 @@ const RegisterModal: FC<RegisterModalProps> = ({
     </>
   );
 };
-
-export default RegisterModal;

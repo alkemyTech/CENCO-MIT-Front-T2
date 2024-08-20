@@ -8,16 +8,22 @@ import { User } from '../../../interfaces/User';
 type Props = {
   user: User;
   onEditClick: (user: User) => void; // Callback para manejar el clic en el botón de edición
+  admin?: boolean;
+  onUpdatePasswordClick?: () => void;
 };
 
-export function UserCard({ user, onEditClick }: Props) {
-  const status = !user.deletedDate ? styles.cardActive : styles.cardInactive;
+export function UserCard({ user, onEditClick, admin, onUpdatePasswordClick }: Props) {
+    const status = !user.deletedDate ? styles.cardActive : styles.cardInactive;
   const avatar = user.role === 'admin' ? avatarAdmin : avatarUser;
 
   return (
     <div className={status}>
       <div className={styles.picture}>
-        <img className={styles.avatar} src={avatar} alt="avatar" />
+        <img
+          className={styles.avatar}
+          src={avatar}
+          alt='avatar'
+        />
         <h2 className={styles.role}>{user.role}</h2>
       </div>
       <div className={styles.info}>
@@ -28,19 +34,28 @@ export function UserCard({ user, onEditClick }: Props) {
           {!user.deletedDate ? (
             <div className={styles.buttons}>
               <Button
-                label="Edit"
+                label='Edit User'
                 onClick={() => onEditClick(user)}
-                type="submit"
+                type='submit'
                 icon={faUserPen}
               />
               <div className={styles.spacer} />
-              <Button
-                label="Delete"
-                onClick={() => alert('Eliminar usuario!')}
-                type="submit"
-                icon={faTrash}
-                style={{ background: 'red' }}
-              />
+              {admin ? (
+                <Button
+                  label='Delete'
+                  onClick={() => alert('Eliminar usuario!')}
+                  type='submit'
+                  icon={faTrash}
+                  style={{ background: 'red' }}
+                />
+              ) : (
+                <Button
+                  label='Edit Password'
+                  onClick={onUpdatePasswordClick}
+                  type='submit'
+                  icon={faUserPen}
+                />
+              )}
             </div>
           ) : (
             <p className={styles.inactive}>Inactive User</p>

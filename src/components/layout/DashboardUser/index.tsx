@@ -1,33 +1,33 @@
 import styles from './style.module.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Button,
-  CardInfoUser,
-  CardContact,
-  ProfilePicture,
-  EditProfileModal,
-} from '../..';
+import { UserCard, EditUserModal, Loader, UpdatePasswordModal } from '../..';
 import { userServices } from '../../../services';
-import { useLogout } from '../../../hooks';
-import {
-  isTokenExpired,
-  isNameValid,
-  isPhoneValid,
-} from '../../../validations';
+import { useLogout, useUpdatePassword } from '../../../hooks';
+import { isTokenExpired } from '../../../validations';
+import { User } from '../../../interfaces/User';
 
 export function DashboardUser() {
   const navigate = useNavigate();
   const { handleLogout } = useLogout();
-  const [token, setToken] = useState('');
+  const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [userId, setUserId] = useState<string | null>(null);
-  const [name, setName] = useState<string>('');
-  const [surname, setSurname] = useState<string>('');
-  const [phone, setPhone] = useState<string>('');
-  const [country, setCountry] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [rut, setRut] = useState<string>('');
+  const {
+    modalUpdatePasswordOpen,
+    openUpdatePasswordModal,
+    closeUpdatePasswordModal,
+  } = useUpdatePassword();
+  const [user, setUser] = useState<User>({
+    id: '',
+    name: '',
+    surname: '',
+    rut: '',
+    email: '',
+    country: '',
+    role: 'user',
+    deletedDate: new Date(),
+    phone: 0,
+  });
 
   useEffect(() => {
     const token = sessionStorage.getItem('accessToken');
@@ -35,27 +35,21 @@ export function DashboardUser() {
       handleLogout();
       navigate('/');
     }
-    setToken(token!);
 
     const getUserInfo = async () => {
       const response = await userServices.getInfo(token!.toLocaleString());
       if (!response.ok)
         throw new Error('Error al obtener la información del usuario');
       const data = await response.json();
-      setUserId(data.id);
-      setName(data.name);
-      setSurname(data.surname);
-      setPhone(data.phone);
-      setCountry(data.country);
-      setEmail(data.email);
-      setRut(data.rut);
+      setUser(data);
     };
 
     try {
       getUserInfo();
     } catch (error) {
-      console.error('Error al obtener la información del usuario:', error);
+      console.error((error as Error).message);
     }
+    setLoading(false);
   }, [handleLogout, navigate]);
 
   const handleOpenModal = () => {
@@ -66,88 +60,35 @@ export function DashboardUser() {
     setIsModalOpen(false);
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (!userId) {
-      alert('No se pudo verificar la identidad del usuario.');
-      return;
-    }
-
-    if (!isNameValid(name)) {
-      alert('El nombre solo puede contener letras, espacios y apóstrofes.');
-      return;
-    }
-
-    if (!isNameValid(surname)) {
-      alert('El apellido solo puede contener letras, espacios y apóstrofes.');
-      return;
-    }
-
-    if (!isPhoneValid(phone)) {
-      alert('El teléfono solo puede contener números.');
-      return;
-    }
-
-    const updatedUser = { name, surname, phone, country };
-    const body = JSON.stringify(updatedUser);
-    try {
-      const response = await userServices.update(token, userId, body);
-      if (!response.ok) {
-        throw new Error('Error al actualizar el perfil');
-      }
-
-      const result = await response.json();
-      console.log('Perfil actualizado con éxito:', result);
-
-      handleCloseModal();
-    } catch (error) {
-      console.error('Error al actualizar el perfil:', error);
-      alert('Hubo un problema al actualizar tu perfil. Intenta de nuevo.');
-    }
+  const handleUserUpdated = () => {
+    handleCloseModal();
   };
 
   return (
-    <div>
-      <div className={styles.pictureSection}>
-        <ProfilePicture />
-        <h1>¡Hola de nuevo!</h1>
-      </div>
-      <div className={styles.personalInfoContainer}>
-        <CardInfoUser
-          name={name}
-          surname={surname}
-          rut={rut}
-          country={country}
+    <div className={styles.content}>
+      <h1 className={styles.h1}>Your Information</h1>
+      {loading ? (
+        <div className={styles.loader}>
+          <Loader />
+        </div>
+      ) : (
+        <UserCard
+          user={user!}
+          onEditClick={handleOpenModal}
+          admin={false}
+          onUpdatePasswordClick={openUpdatePasswordModal}
         />
-        <CardContact
-          phone={phone}
-          email={email}
+      )}
+      {isModalOpen && (
+        <EditUserModal
+          user={{ ...user, phone: user.phone.toString() }}
+          onClose={handleCloseModal}
+          onUserUpdated={handleUserUpdated}
         />
-      </div>
-      <div>
-        <p>Aquí puedes editar tu información personal</p>
-        <br />
-        <p>
-          <Button
-            label={'Editar'}
-            onClick={handleOpenModal}
-          />
-        </p>
-      </div>
-      <EditProfileModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        name={name}
-        surname={surname}
-        phone={phone}
-        pais={country}
-        setName={setName}
-        setSurname={setSurname}
-        setPhone={setPhone}
-        setPais={setCountry}
-        handleSubmit={handleSubmit}
-      />
+      )}
+      {modalUpdatePasswordOpen && (
+        <UpdatePasswordModal onClose={closeUpdatePasswordModal} />
+      )}
     </div>
   );
 }

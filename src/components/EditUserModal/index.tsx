@@ -20,12 +20,14 @@ type EditUserModalProps = {
   user: FormValues;
   onClose: () => void;
   onUserUpdated: () => void;
+  isAdmin?: boolean;
 };
 
 export const EditUserModal: FC<EditUserModalProps> = ({
   user,
   onClose,
   onUserUpdated,
+  isAdmin
 }) => {
   const [formValues, setFormValues] = useState<FormValues>(user);
   const [errors, setErrors] = useState<Partial<FormValues>>({});
@@ -174,13 +176,13 @@ export const EditUserModal: FC<EditUserModalProps> = ({
             onChange={handleChange}
           />
 
-          <input
+          {(isAdmin && <input
             type="email"
             name="email"
             placeholder="Email"
             value={formValues.email}
             onChange={handleChange}
-          />
+          />)}
 
           <input
             type="text"
@@ -190,14 +192,14 @@ export const EditUserModal: FC<EditUserModalProps> = ({
             onChange={handleChange}
           />
 
-          <input
+          {(isAdmin && <input
             type="text"
             name="rut"
             placeholder="RUT"
             value={formValues.rut}
             onChange={handleChange}
             disabled
-          />
+          />)}
 
           <input
             type="text"

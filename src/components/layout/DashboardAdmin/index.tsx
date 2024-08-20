@@ -117,6 +117,7 @@ export function DashboardAdmin() {
           }}
           onClose={closeEditModal}
           onUserUpdated={handleUserUpdated}
+          isAdmin={true}
         />
       )}
       {modalUpdatePasswordOpen && <UpdatePasswordModal onClose={closeUpdatePasswordModal}/>}

@@ -50,7 +50,6 @@ export const userServices = {
   },
   delete: (token: string, id: string) => {
     const url = `${baseUrl}/${users}/${id}`;
-    console.log(url)
     return apiRequest(url, 'DELETE', undefined, token);
   },
 };

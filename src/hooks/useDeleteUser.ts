@@ -23,7 +23,6 @@ export function useDeleteUser() {
 
   const handleConfirmDeleteClick = async (getUsers: () => Promise<void>) => {
     let response: Response;
-    console.log({userId}, {token})
     try {
       response = await userServices.delete(token, userId);
       

@@ -29,6 +29,14 @@ export function DashboardUser() {
     phone: 0,
   });
 
+  const getUserInfo = async (token:string) => {
+    const response = await userServices.getInfo(token.toLocaleString());
+    if (!response.ok)
+      throw new Error('Error al obtener la información del usuario');
+    const data = await response.json();
+    setUser(data);
+  };
+
   useEffect(() => {
     const token = sessionStorage.getItem('accessToken');
     if (!token || isTokenExpired(token)) {
@@ -36,21 +44,14 @@ export function DashboardUser() {
       navigate('/');
     }
 
-    const getUserInfo = async () => {
-      const response = await userServices.getInfo(token!.toLocaleString());
-      if (!response.ok)
-        throw new Error('Error al obtener la información del usuario');
-      const data = await response.json();
-      setUser(data);
-    };
-
     try {
-      getUserInfo();
+      getUserInfo(token!);
+      setLoading(false);
     } catch (error) {
       console.error((error as Error).message);
     }
-    setLoading(false);
-  }, [handleLogout, navigate]);
+    
+  },[navigate]);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);

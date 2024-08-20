@@ -1,9 +1,9 @@
-import styles from './style.module.css';
+import styles from "./style.module.css";
 
-type ModalProps = {
+interface ModalProps {
   children: string | JSX.Element | JSX.Element[];
   onClose?: () => void;
-};
+}
 
 export function Modal({ children, onClose }: ModalProps) {
   return (

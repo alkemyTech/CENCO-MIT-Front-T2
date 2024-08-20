@@ -1,18 +1,42 @@
 import styles from './style.module.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Input, Loader, UserList, RegisterModal, EditUserModal, UpdatePasswordModal } from '../..';
+import {
+  Button,
+  Input,
+  Loader,
+  UserList,
+  RegisterModal,
+  EditUserModal,
+  UpdatePasswordModal,
+  DeleteUserModal,
+} from '../..';
 import { isTokenExpired } from '../../../validations';
-import { useLogout, useUpdatePassword, useDashboard } from '../../../hooks';
+import {
+  useLogout,
+  useUpdatePassword,
+  useDashboard,
+  useDeleteUser,
+} from '../../../hooks';
 import { User } from '../../../interfaces/User';
 
 export function DashboardAdmin() {
   const navigate = useNavigate();
   const { handleLogout } = useLogout();
   const { searchTerm, users, handleSearchClick, getAllUsers } = useDashboard();
-  const { modalUpdatePasswordOpen, openUpdatePasswordModal, closeUpdatePasswordModal } =
-    useUpdatePassword();
-
+  const {
+    modalUpdatePasswordOpen,
+    openUpdatePasswordModal,
+    closeUpdatePasswordModal,
+  } = useUpdatePassword();
+  const {
+    modalDeleteUserOpen,
+    openDeleteUserModal,
+    closeDeleteUserModal,
+    deleteUserErrorMessage,
+    deleteUserSuccessMessage,
+    handleConfirmDeleteClick,
+  } = useDeleteUser();
   const [loading, setLoading] = useState(true);
   const [word, setWord] = useState<string>('');
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false); // Estado para controlar el modal de registro
@@ -99,7 +123,8 @@ export function DashboardAdmin() {
         <UserList
           users={users}
           onEditClick={openEditModal}
-        /> // Pasa la función de apertura del modal de edición
+          onDeleteClick={openDeleteUserModal}
+        />
       )}
 
       {isRegisterModalOpen && (
@@ -120,7 +145,12 @@ export function DashboardAdmin() {
           isAdmin={true}
         />
       )}
-      {modalUpdatePasswordOpen && <UpdatePasswordModal onClose={closeUpdatePasswordModal}/>}
+      {modalUpdatePasswordOpen && (
+        <UpdatePasswordModal onClose={closeUpdatePasswordModal} />
+      )}
+      {modalDeleteUserOpen && (
+        <DeleteUserModal onClose={closeDeleteUserModal} errorMessage={deleteUserErrorMessage} successMessage={deleteUserSuccessMessage} onSubmit={() => handleConfirmDeleteClick(getAllUsers)} />
+      )}
     </div>
   );
 }

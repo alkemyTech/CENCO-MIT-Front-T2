@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { isPasswordValid } from '../validations';
-import { arePasswordsEqual } from '../validations/arePasswordsEqual';
+import { isPasswordValid, arePasswordsEqual } from '../validations';
 import { userServices } from '../services';
 
 export function useUpdatePassword() {
@@ -10,8 +9,9 @@ export function useUpdatePassword() {
   const [newPassword, setNewPassword] = useState<string>('');
   const [repeatPassword, setRepeatPassword] = useState<string>('');
   const [modalUpdatePasswordOpen, setModalUpdatePasswordOpen] = useState(false);
-  const [updatePasswordErrorMessage, setUpdatePasswordErrorMessage] = useState<string>('');
-  const [successMessage, setSuccessMessage] = useState<string>('')
+  const [updatePasswordErrorMessage, setUpdatePasswordErrorMessage] =
+    useState<string>('');
+  const [successMessage, setSuccessMessage] = useState<string>('');
 
   const openUpdatePasswordModal = () => {
     setModalUpdatePasswordOpen(true);
@@ -45,7 +45,7 @@ export function useUpdatePassword() {
       const res = await response.json();
 
       if (response.ok) {
-        setSuccessMessage('Password updated')
+        setSuccessMessage('Password updated');
       } else {
         throw new Error(res.message);
       }

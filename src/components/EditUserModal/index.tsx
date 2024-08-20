@@ -1,6 +1,6 @@
 import styles from './style.module.css'
-import React, { useState, useEffect } from 'react';
-import { Modal, Confirm, Button } from '../index';
+import { FC, useState, useEffect } from 'react';
+import { Modal, Confirm, Button } from '..';
 import { isEmailValid, isPhoneValid } from '../../validations';
 import { userServices } from '../../services';
 import { validationMessages } from '../../constants/messages';
@@ -20,12 +20,14 @@ type EditUserModalProps = {
   user: FormValues;
   onClose: () => void;
   onUserUpdated: () => void;
+  isAdmin?: boolean;
 };
 
-export const EditUserModal: React.FC<EditUserModalProps> = ({
+export const EditUserModal: FC<EditUserModalProps> = ({
   user,
   onClose,
   onUserUpdated,
+  isAdmin
 }) => {
   const [formValues, setFormValues] = useState<FormValues>(user);
   const [errors, setErrors] = useState<Partial<FormValues>>({});
@@ -174,13 +176,13 @@ export const EditUserModal: React.FC<EditUserModalProps> = ({
             onChange={handleChange}
           />
 
-          <input
+          {(isAdmin && <input
             type="email"
             name="email"
             placeholder="Email"
             value={formValues.email}
             onChange={handleChange}
-          />
+          />)}
 
           <input
             type="text"
@@ -190,14 +192,14 @@ export const EditUserModal: React.FC<EditUserModalProps> = ({
             onChange={handleChange}
           />
 
-          <input
+          {(isAdmin && <input
             type="text"
             name="rut"
             placeholder="RUT"
             value={formValues.rut}
             onChange={handleChange}
             disabled
-          />
+          />)}
 
           <input
             type="text"

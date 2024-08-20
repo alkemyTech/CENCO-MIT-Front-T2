@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import styles from './style.module.css';
+import { Link } from 'react-router-dom';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

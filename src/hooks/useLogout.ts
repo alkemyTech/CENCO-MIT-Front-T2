@@ -12,8 +12,8 @@ export function useLogout() {
   };
 
   const handleLogin = () => {
-    setUserLogged(true)
-  }
+    setUserLogged(true);
+  };
 
-  return {userLogged, handleLogout, handleLogin};
+  return { userLogged, handleLogout, handleLogin };
 }

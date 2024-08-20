@@ -1,41 +1,93 @@
-import { useEffect, useState } from 'react';
-import { Loader } from '../..';
 import styles from './style.module.css';
-import { userServices } from '../../../services';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User } from '../../../interfaces/User';
+import { UserCard, EditUserModal, Loader, UpdatePasswordModal } from '../..';
+import { userServices } from '../../../services';
+import { useLogout, useUpdatePassword } from '../../../hooks';
 import { isTokenExpired } from '../../../validations';
+import { User } from '../../../interfaces/User';
 
 export function DashboardUser() {
   const navigate = useNavigate();
+  const { handleLogout } = useLogout();
   const [loading, setLoading] = useState(true);
-  const [info, setInfo] = useState<Partial<User>>({
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const {
+    modalUpdatePasswordOpen,
+    openUpdatePasswordModal,
+    closeUpdatePasswordModal,
+  } = useUpdatePassword();
+  const [user, setUser] = useState<User>({
+    id: '',
     name: '',
+    surname: '',
+    rut: '',
+    email: '',
+    country: '',
+    role: 'user',
+    deletedDate: new Date(),
+    phone: 0,
   });
 
   useEffect(() => {
-    const token = sessionStorage.getItem('accessToken')!
-    if (!token) navigate('/');
-    if(isTokenExpired(token)) navigate('/');
-    const data = async () => {
-      const response = await userServices.getInfo(token.toLocaleString());
-      setInfo(await response.json());
+    const token = sessionStorage.getItem('accessToken');
+    if (!token || isTokenExpired(token)) {
+      handleLogout();
+      navigate('/');
+    }
+
+    const getUserInfo = async () => {
+      const response = await userServices.getInfo(token!.toLocaleString());
+      if (!response.ok)
+        throw new Error('Error al obtener la información del usuario');
+      const data = await response.json();
+      setUser(data);
     };
-    data();
+
+    try {
+      getUserInfo();
+    } catch (error) {
+      console.error((error as Error).message);
+    }
     setLoading(false);
-  }, [navigate]);
+  }, [handleLogout, navigate]);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleUserUpdated = () => {
+    handleCloseModal();
+  };
 
   return (
     <div className={styles.content}>
-      <h1 className={styles.h1}>Dashboard User</h1>
+      <h1 className={styles.h1}>Your Information</h1>
       {loading ? (
         <div className={styles.loader}>
           <Loader />
         </div>
       ) : (
-        <h2 className={styles.h2}>
-          Hello, {info!.name} {info!.surname}
-        </h2>
+        <UserCard
+          user={user!}
+          onEditClick={handleOpenModal}
+          admin={false}
+          onUpdatePasswordClick={openUpdatePasswordModal}
+        />
+      )}
+      {isModalOpen && (
+        <EditUserModal
+          user={{ ...user, phone: user.phone.toString() }}
+          onClose={handleCloseModal}
+          onUserUpdated={handleUserUpdated}
+        />
+      )}
+      {modalUpdatePasswordOpen && (
+        <UpdatePasswordModal onClose={closeUpdatePasswordModal} />
       )}
     </div>
   );

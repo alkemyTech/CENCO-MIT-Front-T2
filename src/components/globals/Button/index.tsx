@@ -1,5 +1,5 @@
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import styles from './style.module.css';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type ButtonProps = {

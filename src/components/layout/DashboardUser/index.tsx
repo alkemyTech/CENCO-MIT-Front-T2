@@ -8,6 +8,7 @@ import { isTokenExpired } from '../../../validations';
 import { User } from '../../../interfaces/User';
 
 export function DashboardUser() {
+  const token = sessionStorage.getItem('accessToken');
   const navigate = useNavigate();
   const { handleLogout } = useLogout();
   const [loading, setLoading] = useState(true);
@@ -38,7 +39,6 @@ export function DashboardUser() {
   };
 
   useEffect(() => {
-    const token = sessionStorage.getItem('accessToken');
     if (!token || isTokenExpired(token)) {
       handleLogout();
       navigate('/');
@@ -61,6 +61,7 @@ export function DashboardUser() {
   };
 
   const handleUserUpdated = () => {
+    getUserInfo(token!);
     handleCloseModal();
   };
 

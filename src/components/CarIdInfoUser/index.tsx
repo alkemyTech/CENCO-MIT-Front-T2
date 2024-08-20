@@ -3,35 +3,30 @@ import styles from "./style.module.css";
 interface CardInfoUserProps {
   name: string;
   surname: string;
-  phone: string;
-  rut?: string;
-  pais?: string;
+  rut: string;
+  country: string;
 }
 
 export function CardInfoUser({
   name,
   surname,
-  phone,
   rut,
-  pais,
+  country
 }: CardInfoUserProps) {
   return (
     <main className={styles.container}>
-      <h2>Información de usuario</h2>
+      <h2>User information</h2>
       <p>
-        <strong>Nombre:</strong> {name}
+        <strong>Name:</strong> {name}
       </p>
       <p>
-        <strong>Apellido:</strong> {surname}
-      </p>
-      <p>
-        <strong>Teléfono:</strong> {phone}
+        <strong>Surname:</strong> {surname}
       </p>
       <p>
         <strong>RUT:</strong> {rut}
       </p>
       <p>
-        <strong>País:</strong> {pais}
+        <strong>Country:</strong> {country}
       </p>
     </main>
   );

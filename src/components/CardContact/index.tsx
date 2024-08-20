@@ -2,7 +2,7 @@ import styles from "./style.module.css";
 
 interface CardContactProps {
   phone: string;
-  email?: string; 
+  email: string; 
 }
 
 export function CardContact({ phone, email }: CardContactProps) {
@@ -10,10 +10,10 @@ export function CardContact({ phone, email }: CardContactProps) {
     <main className={styles.container}>
       <h2>Datos de contacto</h2>
       <p>
-        <strong>Teléfono:</strong> {phone}
+        <strong>Phone number:</strong> {phone}
       </p>
       <p>
-        <strong>Correo Electrónico:</strong> {email}
+        <strong>Email:</strong> {email}
       </p>
     </main>
   );

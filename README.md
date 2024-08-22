@@ -1,4 +1,4 @@
-# Project Name: User Management Client 🧑‍💻
+# Project Name: Talent Manager 🧑‍💻
 
 ## Table of Contents
 - [Description](#description)
@@ -17,17 +17,15 @@ This project is a user management web application built using React and TypeScri
 
 ## Features
 - **Login**: Secure login functionality for users.
-- **Home View**: A dashboard for displaying general information.
+- **Dashboard**: A section for displaying general information and managing users.
 - **User Management**: 
   - **Administrators**: Create, edit, and delete user accounts.
-  - **Regular Users**: View their information and update their password.
+  - **Regular Users**: View their information and update some of their info and password.
 
 ## Technologies Used
 - **TypeScript**: A strongly typed programming language that builds on JavaScript.
 - **React**: A JavaScript library for building user interfaces.
 - **React Router**: A library for routing in React applications.
-- **Redux**: A predictable state container for JavaScript apps.
-- **Prettier**: An opinionated code formatter.
 - **ESLint**: A tool for identifying and reporting on patterns in JavaScript.
 - **Modular CSS**: A CSS file in which all class and animation names are scoped locally by default.
 
@@ -42,15 +40,15 @@ This project is a user management web application built using React and TypeScri
    pnpm install # or npm install
    ```
 3. Create an environment variables (.env) file with the following variables:
-  ```env
-  VITE_BACKEND_URL=http://localhost:3000
-  VITE_LOGIN_URL=auth/login
-  VITE_DASHBOARD_ADMIN_URL=users
-  ```   
+   ```env
+   VITE_BACKEND_URL=http://localhost:3000
+   VITE_LOGIN_URL=auth/login
+   VITE_DASHBOARD_ADMIN_URL=users
+   ```   
 5. Start the application:
    ```bash
    pnpm run dev # or npm run dev
-
+   ```
 ## Usage
 Once the application is running, you can access it at `http://localhost:5173`. The main views include:
 - **Login**: Accessible at `/login`
@@ -61,29 +59,31 @@ Once the application is running, you can access it at `http://localhost:5173`. T
 ```arduino
 CENCO-MIT-Front-T2/
 ├── public/
-│   └── index.html
 ├── src/
 │   ├── assets/
-│   │   └── images/
+│   │   └── imag/
 │   ├── components/
-│   │   └── common/
+│   │   ├── globals/
+│   │   └── layout/
+│   ├── constants/
+│   ├── hooks/
+│   ├── interfaces/
 │   ├── pages/
-│   │   ├── Home/
+│   │   ├── Dashboard/
+│   │   ├── ErrorPage/
 │   │   ├── Login/
-│   │   └── Users/
-│   ├── redux/
-│   │   ├── actions/
-│   │   ├── reducers/
-│   │   └── store.ts
+│   │   └── NotFoundPage/
+│   ├── routes/
+│   ├── services/
+│   ├── validations/
+│   ├── App.css
 │   ├── App.tsx
-│   ├── index.tsx
-│   ├── routes.tsx
-│   ├── styles/
-│   └── utils/
+│   ├── index.css
+│   └── main.tsx
 ├── .eslintrc.js
-├── .prettierrc
 ├── package.json
-└── tsconfig.json
+├── tsconfig.json
+└── vite.config.ts
 
 ```
 ## Business Case

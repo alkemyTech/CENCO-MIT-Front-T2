@@ -16,3 +16,4 @@ export * from './EditUserModal';
 export * from './Notification';
 export * from './RegisterModal';
 export * from './UpdatePasswordModal';
+export * from './DeleteUserModal';

@@ -1,6 +1,6 @@
-const baseUrl = import.meta.env.VITE_BACKEND_URL;
-const login = import.meta.env.VITE_LOGIN_URL;
-const users = import.meta.env.VITE_DASHBOARD_ADMIN_URL;
+const baseUrl = import.meta.env.VITE_BACKEND_URL || 'localhost:3000';
+const login = import.meta.env.VITE_LOGIN_URL || 'auth/login'
+const users = import.meta.env.VITE_DASHBOARD_ADMIN_URL || 'users';
 
 type Method = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 

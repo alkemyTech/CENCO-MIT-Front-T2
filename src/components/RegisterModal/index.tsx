@@ -216,7 +216,7 @@ export const RegisterModal: FC<RegisterModalProps> = ({
               errors.country ||
               errors.rut ||
               errors.phone) &&
-              `All fields must be valid`}
+              `Invalid fields: ${Object.keys(errors).join(', ')}.`}
           </p>
 
           <Button

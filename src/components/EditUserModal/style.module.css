@@ -1,8 +1,8 @@
 .errorLabel {
   color: red;
-  font-size: var(--fs-100);
+  font-size: var(--fs-200);
   position: unset;
-  height: 24px;
+  height: 48px;
 }
 
 .h2 {
@@ -12,4 +12,5 @@
 .grid {
   display: grid;
   gap: .6em;
+  width: 234px;
 }

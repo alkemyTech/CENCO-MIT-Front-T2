@@ -213,7 +213,7 @@ export const EditUserModal: FC<EditUserModalProps> = ({
             errors.email ||
             errors.country ||
             errors.rut ||
-            errors.phone) && `All fields must be valid`}</div>
+            errors.phone) && `Invalid fields: ${Object.keys(errors).join(', ')}.`}</div>
 
           <Button
             label={'Update'}

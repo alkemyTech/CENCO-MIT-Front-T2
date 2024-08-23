@@ -11,7 +11,7 @@ export const validationMessages = {
     phoneRequired: 'Phone number is required',
     phoneInvalid: 'Invalid phone number',
     // Custom error messages from backend
-    userExists: 'This account is already registered.',
+    userExists: 'This email or rut is already registered.',
     badRequest: 'There was a problem with your submission. Please check your details and try again.',
     // New messages for confirmation
     confirmUpdate: 'Are you sure you want to update this user?',
